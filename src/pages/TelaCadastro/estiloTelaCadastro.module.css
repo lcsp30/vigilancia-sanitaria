@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.divPrincipal{
+min-height: 100vh;
+font-family: "Inter", sans-serif;
+position: relative;
+}
+
+.caixaImg{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.imgVoltar{
+width: 40px;
+height: auto;
+}
+
+.caixaFormulario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+}
+
+.formCadastro{
+border: 1px solid #dddddd;
+padding: 50px;
+border-radius: 10px;
+}
+
+.caixaInput{
+display:flex;
+flex-direction: column;
+margin-top: 30px;
+}
+
+.divCadastro{
+margin-top: 40px;
+text-align: end;
+}
+
+.inputCadastro{
+padding: 10px;
+border-radius: 10px;
+width: 25vw;
+border: 2px solid #dddddd;
+}
+
+.labelCadastro{
+font-size: 20px;
+margin-bottom: 2px;
+}
+
+.linkCadastrar{
+color: blue;
+cursor: pointer;
+}
+
+.linkCadastrar:hover{
+opacity: 0.7;
+}

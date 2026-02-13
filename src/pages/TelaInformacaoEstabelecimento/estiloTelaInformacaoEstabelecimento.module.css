@@ -1,0 +1,38 @@
+.divPrincipal{
+min-height: 100vh;
+display: flex;
+align-items: center;
+flex-direction: column;
+}
+
+.divTitulo{
+margin-top: 50px;
+}
+
+.divConteiner{
+width: 70vw;
+margin-top: 50px;
+display: flex;
+flex-direction: column;
+align-items: center;
+row-gap: 40px;
+}
+
+.conteiner{
+width: 40vw;
+height: 100px;
+border: 1px solid #dddddd;
+border-radius: 5px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+}
+
+.conteiner p{
+margin-top: 8px;
+}
+
+.conteiner p b{
+color: #32CD32;
+}

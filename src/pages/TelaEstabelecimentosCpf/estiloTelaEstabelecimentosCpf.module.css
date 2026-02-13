@@ -1,0 +1,58 @@
+.divPrincipal{
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.divTitulo{
+padding: 10px;
+margin-top: 20px;
+}
+
+.divTabela{
+border: 1px solid #dddddd;
+width: 70vw;
+margin-top: 30px;
+padding: 10px 0px 0px 0px;
+border-radius: 5px;
+}
+
+.divInput{
+padding: 20px;
+}
+
+.divInput input{
+    padding: 8px;
+    border: 2px solid #dddddd;
+    border-radius: 5px;
+    width: 25vw;
+}
+
+.tabelaEstabelecimnetos{
+width: 100%;
+border-collapse: collapse;
+}
+
+.tabelaEstabelecimnetos thead tr th{
+border-top: 1px solid #dddddd;
+border-right: 1px solid #dddddd;
+text-align: left;
+padding: 10px;
+}
+
+.tabelaEstabelecimnetos tbody tr td{
+border-top:1px solid #dddddd;
+border-right: 1px solid #dddddd;
+padding: 7px;
+}
+
+.iconeDelete{
+margin-right: 10px;
+}
+
+.tdAcao{
+text-align: center;
+}
+
+

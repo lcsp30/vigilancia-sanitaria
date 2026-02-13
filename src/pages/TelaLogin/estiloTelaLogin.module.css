@@ -1,0 +1,46 @@
+.divPrincipal{
+min-height: 100vh;
+}
+.caixaFormulario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+}
+
+.formLogin{
+border: 1px solid #dddddd;
+padding: 50px;
+border-radius: 10px;
+}
+
+.caixaInput{
+display:flex;
+flex-direction: column;
+margin-top: 30px;
+}
+
+.divCadastro{
+margin-top: 40px;
+text-align: end;
+}
+
+.inputLogin{
+padding: 10px;
+border-radius: 10px;
+width: 20vw;
+border: 2px solid #dddddd;
+}
+
+.labelLogin{
+font-size: 20px;
+}
+
+.linkCadastrar{
+color: blue;
+cursor: pointer;
+}
+
+.linkCadastrar:hover{
+opacity: 0.7;
+}

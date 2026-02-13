@@ -1,0 +1,41 @@
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+.divPrincipal{
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.topo{
+padding: 25px;
+background-color: #dddddd;
+width: 100%;
+text-align: center;
+}
+
+.caixaBtn{
+width: 100%;
+display: flex;
+justify-content: space-around;
+height: 75vh;
+align-items: center;
+}
+
+.btn{
+height: 100px;
+width: 500px;
+cursor: pointer;
+border-radius: 10px;
+border: transparent;
+font-size: 20px;
+}
+
+
+.btn:hover{
+opacity: 0.8;
+}

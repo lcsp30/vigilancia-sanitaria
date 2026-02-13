@@ -1,0 +1,39 @@
+.divPrincipal{
+min-height: 100vh;
+display: flex;
+justify-content: center;
+}
+
+.divTitulo{
+text-align: center;
+margin-top: 10px;
+margin-bottom: 5px;
+}
+
+.formCpf{
+padding: 20px;
+border: 1px solid #dddddd;
+height: 100%;
+margin-top: 10px;
+margin-bottom: 40px;
+border-radius: 10px;
+}
+
+.caixaInput{
+display: flex;
+align-items: center;
+padding: 10px;
+margin: 20px;
+gap: 30px;
+}
+
+.caixaInput select{
+width: 40vw;
+padding: 5px;
+}
+
+.caixaInput input{
+padding: 5px;
+}
+
+
