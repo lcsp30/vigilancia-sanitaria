@@ -1,10 +1,12 @@
 .divPrincipal{
 min-height: 100vh;
+max-width: 72vw;
+margin: 0 auto;
+padding-bottom: 50px;
 }
 
 .divTitulo{
 padding: 20px;
-padding-left: 12vw;
 }
 
 .conteinerDividido{
@@ -142,4 +144,58 @@ width: 80%;
 margin-top: 4px;
 padding-left: 4px;
 font-size: 14px;
+}
+
+
+.conteinerNotificacoes{
+margin-top: 30px;
+width: 100%;
+display: flex;
+}
+
+.divNot{
+border: 1px solid #dddddd;
+width: 50%;
+padding: 15px;
+border-radius: 5px;
+}
+
+
+.conteinerNotificacoes button{
+padding: 15px;
+margin-top: 5px;
+border-radius: 5px;
+border: 1px solid black;
+cursor: pointer;
+}
+
+.divIntimacao{
+margin-bottom: 20px;
+}
+
+.tabelaIntimacao{
+width: 100%;
+border-collapse: collapse;
+}
+
+.tabelaIntimacao thead tr th{
+border: 1px solid #dddddd;
+text-align: left;
+padding: 10px;
+}
+
+.tabelaIntimacao tbody tr td{
+border-bottom:1px solid #dddddd;
+border-right: 1px solid #dddddd;
+border-left: 1px solid #dddddd;
+padding: 5px;
+}
+
+.tdBtnFinalizar{
+text-align: center;
+}
+
+.tdBtnFinalizar button{
+margin: 0%;
+padding: 10px;
 }

@@ -7,8 +7,8 @@ function App() {
 
   let nav = useNavigate();
 
-  function login(){
-    nav("/Login");
+  function funcionalidades(){
+    nav("/funcionalidades");
   }
 
   return (
@@ -17,7 +17,7 @@ function App() {
       <h1>Sistema da Vigilância</h1>
     </header>
     <div className={estilo.caixaBtn}>
-      <button className={estilo.btn} onClick={login}>Vigilância Sanitária</button>
+      <button className={estilo.btn} onClick={funcionalidades}>Vigilância Sanitária</button>
       <button className={estilo.btn}>Zoonoses</button>
     </div>
    </div>

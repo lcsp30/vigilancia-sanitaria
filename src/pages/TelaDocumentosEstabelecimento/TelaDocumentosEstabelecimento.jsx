@@ -134,7 +134,7 @@ function TelaDocumentosEstabelecimento(){
                     </div>
                     
                     <div className={estilo.caixaBtn}>
-                        <button>Gerar Licença</button>
+                        <button style={{cursor: "pointer"}}>Gerar Licença</button>
                         <div>
                             <p>Documentos Obrigatórios:  <b>3/8</b></p>
                         </div>
@@ -145,6 +145,65 @@ function TelaDocumentosEstabelecimento(){
 
             </div>
             
+            <div className={estilo.conteinerNotificacoes}>
+                <div className={estilo.divNot}>
+                    <div className={estilo.divIntimacao}>
+                        <h4>Intimação</h4>
+                        <button>Gerar Intimação</button>  
+                    </div>
+
+                    <div>
+                        <table className={estilo.tabelaIntimacao}>
+                            <thead>
+                                <tr>
+                                    <th>Data Intimação</th>
+                                    <th>Data de Expiração</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>15/02/2022</td>
+                                    <td>17/02/2022</td>
+                                    <td className={estilo.tdBtnFinalizar}>
+                                        <button>Finalizar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                        
+                </div>
+
+                <div className={estilo.divNot}>
+                    <div className={estilo.divIntimacao}>
+                         <h4>Gerar Auto de Constatação e Advertência</h4>
+                         <button>Auto de Constatação e Advertência</button>
+                    </div>
+                   
+                    <div>
+                        <table className={estilo.tabelaIntimacao}>
+                            <thead>
+                                <tr>
+                                    <th>Data da Advertência</th>
+                                    <th>Data de Expiração</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>15/02/2022</td>
+                                    <td>17/02/2022</td>
+                                    <td className={estilo.tdBtnFinalizar}>
+                                        <button>Finalizar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
            
         </div>
     );

@@ -1,7 +1,14 @@
 import estilo from "./estiloTelaEstabelecimentosCpf.module.css";
-import IconesAcao from "../../components/IconesAcao";
+import { AiTwotoneDelete, AiOutlineExport} from "react-icons/ai";
+import { useNavigate } from "react-router";
 
 function TelaEstabelecimentosCpf(){
+    let nav = useNavigate();
+
+    function detalhes(){
+        nav('/informacao-estabelecimento');
+    }
+
     return(
         <div className={estilo.divPrincipal}>
             <div className={estilo.divTitulo}>
@@ -28,14 +35,24 @@ function TelaEstabelecimentosCpf(){
                                     <td>Weliton Programação Ltda</td>
                                     <td>Weliton Batista Pereira</td>
                                     <td style={{color:"#32CD32"}}>Ativo ✔</td>
-                                    <td><IconesAcao/></td>
+                                    <td>
+                                        <div style={{textAlign:"center"}}>
+                                            <AiTwotoneDelete size={23} style={{cursor:"pointer", marginRight:"20px"}}/> 
+                                            <AiOutlineExport size={23} style={{cursor:"pointer"}} onClick={detalhes}/>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>000.000.000-00</td>
                                     <td>Luis Programação Ltda</td>
                                     <td>Luis Carlos Souza</td>
                                     <td style={{color: "#FFD700"}}>Pendencia de Documentação 📄</td>
-                                    <td><IconesAcao/></td> 
+                                    <td>
+                                        <div style={{textAlign:"center"}}>
+                                            <AiTwotoneDelete size={23} style={{cursor:"pointer", marginRight:"20px"}}/> 
+                                            <AiOutlineExport size={23} style={{cursor:"pointer"}} onClick={detalhes}/>
+                                        </div>
+                                    </td> 
                                 </tr>
                             </tbody>
                         </table>

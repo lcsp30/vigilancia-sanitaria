@@ -11,6 +11,7 @@ import FormularioCnpj from './pages/FormularioCadastroCnpj/FormularioCnpj';
 import TelaEstabelecimentosCpf from './pages/TelaEstabelecimentosCpf/TelaEstabelecimentosCpf';
 import TelaInformacaoEstabelecimento from './pages/TelaInformacaoEstabelecimento/TelaInformacaoEstabelecimento';
 import TelaDocumentosEstabelecimento from './pages/TelaDocumentosEstabelecimento/TelaDocumentosEstabelecimento';
+import TelaEstabelecimentosNotificados from './pages/TelaEstabelecimentosNotificados/TelaEstabelecimentosNotificados';
 
 let router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ let router = createBrowserRouter([
   {
     path:"/documentos",
     Component: TelaDocumentosEstabelecimento,
+  },
+  {
+    path:"/estabelecimentos-notificados",
+    Component: TelaEstabelecimentosNotificados,
   }
 ]);
 
