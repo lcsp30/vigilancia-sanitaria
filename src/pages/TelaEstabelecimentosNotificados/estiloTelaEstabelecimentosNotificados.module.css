@@ -8,7 +8,7 @@ align-items: center;
 .divTitulo{
 padding: 10px;
 margin-top: 20px;
-width: 70vw;
+width: 80vw;
 display: flex;
 justify-content: space-between;
 }
@@ -25,7 +25,7 @@ opacity: 0.6;
 
 .divTabela{
 border: 1px solid #dddddd;
-width: 70vw;
+width: 85vw;
 margin-top: 30px;
 padding: 10px 0px 0px 0px;
 border-radius: 5px;
@@ -65,7 +65,9 @@ margin-right: 10px;
 }
 
 .tdBtn{
-text-align: center;
+display: flex;
+justify-content: center;
+gap: 10px;
 }
 
 .tdBtn button{

@@ -8,6 +8,10 @@ function cadastroCpf(){
     nav('/formCpf');
 }
 
+function cadastroCnpj(){
+    nav('/formCnpj')
+}
+
 function estabelecimentoCpf(){
     nav('/estabelecimentos-cpf');
 }
@@ -24,7 +28,7 @@ function notificados(){
                     <h2 style={{textAlign: "center"}} >Cadastro de Pessoa Física (CPF)</h2>
                     </div>
                 <div className={estilo.funcoes}>
-                    <h2 style={{textAlign: "center"}}>Cadastro de Pessoa Jurídica (CNPJ)</h2>
+                    <h2 style={{textAlign: "center"}} onClick={cadastroCnpj}>Cadastro de Pessoa Jurídica (CNPJ)</h2>
                 </div>
                 <div className={estilo.funcoes} onClick={notificados}>
                     <h2 style={{textAlign: "center"}}>Estabelecimentos Notificados</h2>

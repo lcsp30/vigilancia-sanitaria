@@ -1,39 +1,176 @@
+
+/* Container principal */
 .divPrincipal{
-min-height: 100vh;
-display: flex;
-justify-content: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
+/* Título */
 .divTitulo{
-text-align: center;
-margin-top: 10px;
-margin-bottom: 5px;
+  text-align: center;
+  margin: 10px 0 8px;
+}
+.divTitulo h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
+/* Formulário */
 .formCpf{
-padding: 20px;
-border: 1px solid #dddddd;
-height: 100%;
-margin-top: 10px;
-margin-bottom: 40px;
-border-radius: 10px;
+  width: 100%;
+  max-width: 760px;
+  padding: 28px;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  background: transparent;
+  margin: 10px 0 40px;
 }
 
+.formCpf:hover {
+  box-shadow: 0 14px 36px rgba(0,0,0,0.07);
+}
+
+/* Estrutura interna do formulário */
+.formInterno{
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Caixa de input: organização e espaçamento */
 .caixaInput{
-display: flex;
-align-items: center;
-padding: 10px;
-margin: 20px;
-gap: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 10px 24px;
+  padding: 10px 0;
+  margin: 16px 0;
 }
 
-.caixaInput select{
-width: 40vw;
-padding: 5px;
+/* Estilos para label (se houver) */
+.caixaInput label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  align-self: center;
+  display: block;
 }
 
+/* Inputs e selects: aparência consistente */
+.caixaInput select,
 .caixaInput input{
-padding: 5px;
+  width: 100%;
+  height: 44px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  background: transparent;
+  color: inherit;
 }
 
+.caixaInput textarea {
+  min-height: 100px;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
+/* Foco mais visível sem usar cores fortes */
+.caixaInput select:focus,
+.caixaInput input:focus{
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
+  border-color: #cfcfcf;
+}
+
+.caixaCategoria{
+ padding: 10px 0;
+  margin: 16px 0;
+}
+
+.caixaCategoria select{
+  width: 100%;
+  height: 44px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  background: transparent;
+  color: inherit;
+}
+
+.caixaCategoria label{
+  font-size: 0.95rem;
+  font-weight: 600;
+  align-self: center;
+  display: block;
+}
+
+.caixaObs{
+ padding: 10px 0;
+ margin: 16px 0;
+}
+
+.caixaObs{
+  font-size: 0.95rem;
+  font-weight: 600;
+  align-self: center;
+  display: block;
+}
+
+.caixaObs textarea{
+  width: 100%;
+  height: 20vh;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  background: transparent;
+  color: inherit;
+}
+
+.caixaBtn{
+    display: flex;
+    justify-content: end;
+    margin-top: 50px;
+}
+
+.caixaBtn button{
+padding: 20px 40px;
+border-radius: 10px;
+cursor: pointer;
+border:2px solid #dcdcdc ;
+font-size: 0.95rem;
+font-weight: 600;
+}
+
+.caixaBtn button:hover{
+opacity: 0.8;
+}
+
+/* Ajustes para dispositivos pequenos */
+@media (max-width: 600px) {
+  .formCpf {
+    padding: 20px;
+  }
+  .caixaInput{
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .divTitulo h1 {
+    font-size: 1.1rem;
+  }
+}

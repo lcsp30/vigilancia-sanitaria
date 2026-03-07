@@ -1,5 +1,6 @@
 import estilo from "./estiloFormularioCpf.module.css";
 import { useState } from "react";
+import api from "../../services/api";
 
 function FormularioCpf(){
 
@@ -16,11 +17,22 @@ function FormularioCpf(){
     }
  }
 
+ function enviarForm(event){
+    event.preventDefault();
+    let dadosForm = new FormData(event.target);
+    const data = Object.fromEntries(dadosForm);
+    
+    api.post('estabelecimentos_cpf', data)
+    .then(response => console.log(response.data))
+    .catch(error => console.error(error)
+    );
+ }
+
     return(
         <div className={estilo.divPrincipal}>
 
             <div className={estilo.formCpf}>
-                <form action="" className={estilo.formInterno}>
+                <form onSubmit={enviarForm} className={estilo.formInterno}>
                     <div className={estilo.divTitulo}>
                         {selecionado == "" && <h2>Cadastro</h2>}
                         {selecionado == "liberal" && <h2>Cadastro Profissional Liberal</h2>}
@@ -31,11 +43,12 @@ function FormularioCpf(){
                 <label htmlFor="categoria" >Categoria: </label>
                   <select name="categoria" id="" value={selecionado} onChange={valorSelect}>
                     <option value="">Selecione a Categoria</option>
-                    <option value="liberal">Profissional Liberal</option>
-                    <option value="autonomo">Autônomo</option>
+                    <option value="Profissional Liberal">Profissional Liberal</option>
+                    <option value="Autônomo">Autônomo</option>
                   </select>
                 </div>
             </div>
+
             <div className={estilo.caixaInput}>
                 <div>
                     <label htmlFor="nome">Nome:</label>
@@ -47,6 +60,7 @@ function FormularioCpf(){
                     <input name="cpf" type="number" disabled={chave}/>
                 </div>
             </div>
+            
             <div className={estilo.caixaInput}>
                 <div>
                     <label htmlFor="rg">RG:</label>
@@ -54,13 +68,13 @@ function FormularioCpf(){
                 </div>
 
                 <div>
-                    <label htmlFor="orgaoExpedidor">Órgão Expedidor: </label>
-                    <input name="orgaoExpedidor" type="text" disabled={chave}/>
+                    <label htmlFor="orgao_expedidor">Órgão Expedidor: </label>
+                    <input name="orgao_expedidor" type="text" disabled={chave}/>
                 </div>
 
                 <div>
-                    <label htmlFor="dataExpedicao">Data da Expedição: </label>
-                    <input name="dataExpedicao" type="date" disabled={chave}/>
+                    <label htmlFor="data_expedicao_rg">Data da Expedição: </label>
+                    <input name="data_expedicao_rg" type="date" disabled={chave}/>
                 </div>
             </div>
             {selecionado == "liberal" && 
@@ -70,15 +84,15 @@ function FormularioCpf(){
                     <input name="escolaridade" type="text" disabled={chave}/>
                 </div>
                 <div>
-                    <label htmlFor="formacao">Formação Profissional: </label>
-                    <input name="formacao" type="text" disabled={chave}/>
+                    <label htmlFor="formacao_profissional">Formação Profissional: </label>
+                    <input name="formacao_profissional" type="text" disabled={chave}/>
                 </div>
             </div>}
             {selecionado == "liberal" && 
             <div className={estilo.caixaInput}>
                 <div>
-                    <label htmlFor="registroConselho">Registro no Conselho: </label>
-                    <input name="registroConselho" type="text" disabled={chave}/>
+                    <label htmlFor="registro_conselho">Registro no Conselho: </label>
+                    <input name="registro_conselho" type="text" disabled={chave}/>
                 </div>
                 <div>
                     <label htmlFor="especializacao"> Especialização: </label>
@@ -87,12 +101,12 @@ function FormularioCpf(){
             </div>}
             <div className={estilo.caixaInput}>
                 <div>
-                    <label htmlFor="nomeFantasia">Nome Fantasia: </label>
-                    <input name="nomeFantasia" type="text" style={{width:"25vw"}} disabled={chave}/>
+                    <label htmlFor="nome_fantasia">Nome Fantasia: </label>
+                    <input name="nome_fantasia" type="text" style={{width:"25vw"}} disabled={chave}/>
                 </div>
                 <div>
-                    <label htmlFor="dataInicioFuncionamento"> Data de Início de Funcionamento: </label>
-                    <input name="dataInicio" type="date" disabled={chave}/>
+                    <label htmlFor="data_inicio_funcionamento"> Data de Início de Funcionamento: </label>
+                    <input name="data_inicio_funcionamento" type="date" disabled={chave}/>
                 </div>
             </div>
             <div className={estilo.caixaInput}>
@@ -102,15 +116,23 @@ function FormularioCpf(){
                 </div>
 
                 <div>
-                    <label htmlFor="numero">Número: </label>
-                    <input name="numero"  type="number" disabled={chave}/>
+                    <label htmlFor="numero_endereco">Número: </label>
+                    <input name="numero_endereco"  type="number" disabled={chave}/>
                 </div>
-                
+            </div>
+            
+            <div className={estilo.caixaInput}>
                 <div>
                     <label htmlFor="bairro">Bairro: </label>
                     <input name="bairro" type="text" disabled={chave}/>
                 </div>
+
+                 <div>
+                    <label htmlFor="complemento_endereco">Complemento: </label>
+                    <input name="complemento_endereco"  type="text" disabled={chave}/>
+                </div>
             </div>
+
             <div className={estilo.caixaInput}>
                 <div>
                     <label htmlFor="municipio">Município: </label>
@@ -125,12 +147,12 @@ function FormularioCpf(){
             <div className={estilo.caixaInput}>
                 <div>
                      <label htmlFor="telefone">Telefone: </label>
-                     <input type="text" disabled={chave}/>
+                     <input name="telefone" type="text" disabled={chave}/>
                 </div>
 
                 <div>
                     <label htmlFor="email">E-mail: </label>
-                    <input type="text" disabled={chave}/>
+                    <input name="email" type="text" disabled={chave}/>
                 </div>
                 
             </div>
@@ -138,7 +160,7 @@ function FormularioCpf(){
             <div className={estilo.caixaObs}>
                 <div>
                     <label htmlFor="obs">Observações:</label>
-                    <textarea name="" id=""  disabled={chave}></textarea>
+                    <textarea name="obs" disabled={chave}></textarea>
                 </div>
             </div>
 

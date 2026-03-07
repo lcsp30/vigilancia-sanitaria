@@ -1,5 +1,6 @@
 .divPrincipal{
 min-height: 100vh;
+background-color: #aad1a3;
 }
 
 .caixaFuncoesPrincipal{
@@ -12,17 +13,22 @@ padding-top: 100px;
 
 .caixaFuncoes{
 display: flex;
-gap: 30px;
+gap: 45px;
 padding: 30px;
 }
 
 .funcoes{
 width: 300px;
 height: 200px;
-border: 1px solid #dddddd;
 border-radius: 10px;
+border: 1px solid #ffffff;
 display: flex;
 align-items: center;
 cursor: pointer;
 padding: 10px;
+background-color: #dddddd;
+}
+
+.funcoes:hover{
+opacity: 0.8;
 }

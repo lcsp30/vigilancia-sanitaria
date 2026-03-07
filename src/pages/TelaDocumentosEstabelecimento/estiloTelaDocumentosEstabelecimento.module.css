@@ -30,8 +30,9 @@ border-bottom: 1px solid #dddddd;
 }
 
 .caixaPendenciasDivididas{
-    display: flex;
-    gap: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 0px;
 }
 
 .divTituloPendentes{
@@ -52,6 +53,7 @@ border-radius: 10px;
 display: flex;
 align-items: center;
 justify-content: space-between;
+gap: 7px;
 width: 22vw;
 }
 
@@ -111,10 +113,17 @@ align-items: center;
 gap: 20px;
 }
 
+.caixaGeralLicenca{
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
 .conteinerLicenca{
 width: 20vw;
 border: 1px solid #dddddd;
 border-radius: 5px;
+height: 35vh;
 }
 
 
