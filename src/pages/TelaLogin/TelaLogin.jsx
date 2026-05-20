@@ -4,30 +4,21 @@ import { useNavigate } from "react-router";
 function TelaLogin(){
     let nav = useNavigate();
 
-    function cadastro(){
-        nav("/cadastro");
-    }
-
     return(
         <div className={estilo.divPrincipal}>
             <div className={estilo.caixaFormulario}>
-                    <form className={estilo.formLogin} action="">
-                        <div style={{textAlign: "center"}}>
-                            <h2>Login</h2>
-                        </div>
-
-                        <div className={estilo.caixaInput}>
-                            <label className={estilo.labelLogin} htmlFor="usuario">Usuario</label>
-                            <input className={estilo.inputLogin} type="text" name="senha"/>
+                    <form className={estilo.formLogin}>
+                        <div style={{textAlign: "center", marginBottom: "8px"}}>
+                            <h2 style={{fontSize: "1.5rem", fontWeight: 700, letterSpacing: "-0.02em", color: "#1f2937", margin: 0}}>Login</h2>
                         </div>
                         
                         <div className={estilo.caixaInput}>
-                            <label className={estilo.labelLogin} htmlFor="senha">Senha</label>
-                            <input className={estilo.inputLogin} type="text" name="senha"/>
+                            <label className={estilo.labelLogin} htmlFor="senha">Código de Acesso</label>
+                            <input className={estilo.inputLogin} type="text" name="senha" placeholder="Digite seu código de acesso"/>
                         </div>
 
-                        <div className={estilo.divCadastro}>
-                            <p>Ainda não tem cadastro? <a className={estilo.linkCadastrar} onClick={cadastro}>Cadastrar-se</a></p>
+                        <div className={estilo.caixaBtn}>
+                            <button className={estilo.btnEntrar} type="submit">Entrar</button>
                         </div>
                     </form>
             </div>

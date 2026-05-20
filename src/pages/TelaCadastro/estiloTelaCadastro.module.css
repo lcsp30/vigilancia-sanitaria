@@ -62,3 +62,29 @@ cursor: pointer;
 .linkCadastrar:hover{
 opacity: 0.7;
 }
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .caixaFormulario {
+    height: auto;
+    padding: 80px 16px;
+  }
+  .formCadastro {
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .inputCadastro {
+    width: 100%;
+  }
+  .labelCadastro {
+    font-size: 16px;
+  }
+  .caixaImg {
+    top: 12px;
+    left: 12px;
+  }
+  .imgVoltar {
+    width: 32px;
+  }
+}

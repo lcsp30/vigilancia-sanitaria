@@ -1,6 +1,5 @@
 
-/* Container principal */
-.divPrincipal{
+/* .divPrincipal{
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -8,7 +7,7 @@
   padding: 40px 20px;
 }
 
-/* Título */
+
 .divTitulo{
   text-align: center;
   margin: 10px 0 8px;
@@ -20,7 +19,7 @@
   letter-spacing: 0.2px;
 }
 
-/* Formulário */
+
 .formCpf{
   width: 100%;
   max-width: 760px;
@@ -37,14 +36,14 @@
   box-shadow: 0 14px 36px rgba(0,0,0,0.07);
 }
 
-/* Estrutura interna do formulário */
+
 .formInterno{
   width: 90%;
   margin: 0 auto;
   display: block;
 }
 
-/* Caixa de input: organização e espaçamento */
+
 .caixaInput{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -54,7 +53,7 @@
   margin: 16px 0;
 }
 
-/* Estilos para label (se houver) */
+
 .caixaInput label {
   font-size: 0.95rem;
   font-weight: 600;
@@ -62,7 +61,7 @@
   display: block;
 }
 
-/* Inputs e selects: aparência consistente */
+
 .caixaInput select,
 .caixaInput input{
   width: 100%;
@@ -84,7 +83,6 @@
   padding-bottom: 10px;
 }
 
-/* Foco mais visível sem usar cores fortes */
 .caixaInput select:focus,
 .caixaInput input:focus{
   box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
@@ -158,6 +156,252 @@ font-weight: 600;
 
 .caixaBtn button:hover{
 opacity: 0.8;
+} */
+
+/* Ajustes para dispositivos pequenos */
+/* @media (max-width: 600px) {
+  .formCpf {
+    padding: 20px;
+  }
+  .caixaInput{
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .divTitulo h1 {
+    font-size: 1.1rem;
+  }
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Container principal */
+.divPrincipal{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #f4f7f5 0%, #eef2ef 100%);
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+}
+
+/* Título */
+.divTitulo{
+  text-align: center;
+  margin: 10px 0 8px;
+}
+.divTitulo h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #1f2937;
+}
+
+/* Formulário */
+.formCpf{
+  width: 100%;
+  max-width: 760px;
+  padding: 28px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  position: relative;
+}
+
+/* Estrutura interna do formulário */
+.formInterno{
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Caixa de input: organização e espaçamento */
+.caixaInput{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 10px 24px;
+  padding: 10px 0;
+  margin: 16px 0;
+}
+
+/* Estilos para label (se houver) */
+.caixaInput label {
+  font-size: 0.96rem;
+  font-weight: 600;
+  align-self: center;
+  display: block;
+  color: #374151;
+  letter-spacing: 0.01em;
+}
+
+/* Inputs e selects: aparência consistente */
+.caixaInput select,
+.caixaInput input{
+  width: 100%;
+  height: 44px;
+  padding: 8px 12px;
+  font-size: 0.97rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  background: #ffffff;
+  color: #1f2937;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.caixaInput input::placeholder,
+.caixaObs textarea::placeholder{
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.caixaInput textarea {
+  min-height: 100px;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Foco mais visível sem usar cores fortes */
+.caixaInput select:hover,
+.caixaInput input:hover{
+  border-color: #006837;
+  background-color: #fcfdfc;
+}
+
+.caixaInput select:focus,
+.caixaInput input:focus{
+  box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12);
+  border-color: #006837;
+  background-color: #ffffff;
+}
+
+.caixaCategoria{
+ padding: 10px 0;
+ margin: 16px 0;
+}
+
+.caixaCategoria select{
+  width: 100%;
+  height: 44px;
+  padding: 8px 12px;
+  font-size: 0.97rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  background: #ffffff;
+  color: #1f2937;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.caixaCategoria select:hover{
+  border-color: #006837;
+  background-color: #fcfdfc;
+}
+
+.caixaCategoria select:focus{
+  box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12);
+  border-color: #006837;
+  background-color: #ffffff;
+}
+
+.caixaCategoria label{
+  font-size: 0.96rem;
+  font-weight: 600;
+  align-self: center;
+  display: block;
+  color: #374151;
+  letter-spacing: 0.01em;
+}
+
+.caixaObs{
+ padding: 10px 0;
+ margin: 16px 0;
+}
+
+.caixaObs{
+  font-size: 0.96rem;
+  font-weight: 600;
+  align-self: center;
+  display: block;
+  color: #374151;
+  letter-spacing: 0.01em;
+}
+
+.caixaObs textarea{
+  width: 100%;
+  height: 20vh;
+  padding: 10px 12px;
+  font-size: 0.97rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  background: #ffffff;
+  color: #1f2937;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+  resize: vertical;
+}
+
+.caixaObs textarea:hover{
+  border-color: #006837;
+  background-color: #fcfdfc;
+}
+
+.caixaObs textarea:focus{
+  box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12);
+  border-color: #006837;
+  background-color: #ffffff;
+}
+
+.caixaBtn{
+    display: flex;
+    justify-content: end;
+    margin-top: 50px;
+    gap: 20px;
+}
+
+.caixaBtn button{
+padding: 20px 20px;
+border-radius: 10px;
+cursor: pointer;
+border: 1px solid #2f5d50;
+font-size: 0.96rem;
+font-weight: 600;
+font-family: 'Inter', sans-serif;
+letter-spacing: 0.01em;
+background: #006837;
+color: #ffffff;
+box-shadow: 0 8px 20px rgba(47, 93, 80, 0.18);
+transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.caixaBtn button:hover{
+opacity: 0.9;
+transform: translateY(-1px);
+box-shadow: 0 12px 24px rgba(47, 93, 80, 0.22);
+}
+
+.caixaBtn button:focus{
+outline: none;
+box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.14), 0 12px 24px rgba(47, 93, 80, 0.22);
+}
+
+.caixaBtn button:active{
+transform: translateY(0);
+box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
 }
 
 /* Ajustes para dispositivos pequenos */
@@ -171,6 +415,18 @@ opacity: 0.8;
     margin: 12px 0;
   }
   .divTitulo h1 {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
+}
+
+.iconeVoltar{
+position: absolute;
+top: 40px;
+left: 25px;
+cursor: pointer;
+}
+
+.iconeVoltar:hover{
+opacity: 1;
+transform: translateY(-1px);
 }

@@ -14,7 +14,7 @@ function App() {
   return (
    <div className={estilo.divPrincipal}>
     <header className={estilo.topo}>
-      <h1>Sistema da Vigilância</h1>
+      <h1>Sistema VISA</h1>
     </header>
     <div className={estilo.caixaBtn}>
       <button className={estilo.btn} onClick={funcionalidades}>Vigilância Sanitária</button>

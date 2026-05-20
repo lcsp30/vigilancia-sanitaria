@@ -12,6 +12,8 @@ import TelaEstabelecimentosCpf from './pages/TelaEstabelecimentosCpf/TelaEstabel
 import TelaInformacaoEstabelecimento from './pages/TelaInformacaoEstabelecimento/TelaInformacaoEstabelecimento';
 import TelaDocumentosEstabelecimento from './pages/TelaDocumentosEstabelecimento/TelaDocumentosEstabelecimento';
 import TelaEstabelecimentosNotificados from './pages/TelaEstabelecimentosNotificados/TelaEstabelecimentosNotificados';
+import TelaEstabelecimentosCnpj from './pages/TelaEstabelecimentosCnpj/TelaEstabelecimentosCnpj';
+import TelaLicencas from './pages/TelaLicencas/TelaLicencas';
 
 let router = createBrowserRouter([
   {
@@ -19,7 +21,7 @@ let router = createBrowserRouter([
     Component: App,
   },
   {
-    path:"/Login",
+    path:"/login",
     Component: TelaLogin,
   },
   {
@@ -53,6 +55,14 @@ let router = createBrowserRouter([
   {
     path:"/estabelecimentos-notificados",
     Component: TelaEstabelecimentosNotificados,
+  },
+  {
+    path:"/estabelecimentos-cnpj",
+    Component: TelaEstabelecimentosCnpj,
+  },
+  {
+    path:"/telaLicencas",
+    Component: TelaLicencas,
   }
 ]);
 

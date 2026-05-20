@@ -1,5 +1,4 @@
 import estilo from "./estiloTelaCadastro.module.css";
-import voltar from "./volte.png";
 import { useNavigate } from "react-router";
 
 

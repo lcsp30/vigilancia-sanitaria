@@ -1,8 +1,15 @@
-.divPrincipal{
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* .divPrincipal{
 min-height: 100vh;
 display: flex;
 flex-direction: column;
 align-items: center;
+background: linear-gradient(180deg, #f4f7f5 0%, #eef2ef 100%);
+font-family: 'Inter', sans-serif;
+color: #1f2937;
 }
 
 .divTitulo{
@@ -11,57 +18,150 @@ margin-top: 20px;
 width: 80vw;
 display: flex;
 justify-content: space-between;
+align-items: center;
+color: #1f2937;
 }
 
 .divTitulo button{
-padding: 20px;
-border-radius: 5px;
+padding: 14px 22px;
+border-radius: 10px;
 cursor: pointer;
+border: 1px solid #2f5d50;
+background: linear-gradient(90deg, #2f5d50 0%, #3d6f61 100%);
+color: #ffffff;
+font-family: 'Inter', sans-serif;
+font-size: 0.85rem;
+font-weight: 600;
+letter-spacing: 0.01em;
+box-shadow: 0 8px 20px rgba(47, 93, 80, 0.18);
+transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 }
 
 .divTitulo button:hover{
-opacity: 0.6;
+opacity: 1;
+transform: translateY(-2px);
+box-shadow: 0 12px 24px rgba(47, 93, 80, 0.22);
+background: linear-gradient(90deg, #264b40 0%, #355f54 100%);
+}
+
+.divTitulo button:focus{
+outline: none;
+box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.14), 0 12px 24px rgba(47, 93, 80, 0.22);
+}
+
+.divTitulo button:active{
+transform: translateY(0);
+box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
 }
 
 .divTabela{
-border: 1px solid #dddddd;
+border: 1px solid #d1d5db;
 width: 85vw;
 margin-top: 30px;
 padding: 10px 0px 0px 0px;
-border-radius: 5px;
+border-radius: 12px;
+background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
+box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+overflow: hidden;
 }
 
 .divInput{
 padding: 20px;
+background-color: #f9fafb;
+border-bottom: 1px solid #e5e7eb;
 }
 
 .divInput input{
     padding: 8px;
-    border: 2px solid #dddddd;
-    border-radius: 5px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
     width: 25vw;
+    background: #ffffff;
+    color: #1f2937;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.divInput input::placeholder{
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.divInput input:hover{
+    border-color: #4b7d67;
+    background-color: #fcfdfc;
+}
+
+.divInput input:focus{
+    border-color: #2f5d50;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12);
 }
 
 .tabelaEstabelecimnetos{
 width: 100%;
 border-collapse: collapse;
+background-color: #ffffff;
+}
+
+.tabelaEstabelecimnetos thead tr{
+background: linear-gradient(90deg, #2f5d50 0%, #3d6f61 100%);
 }
 
 .tabelaEstabelecimnetos thead tr th{
-border-top: 1px solid #dddddd;
-border-right: 1px solid #dddddd;
+border-top: 1px solid rgba(255, 255, 255, 0.08);
+border-right: 1px solid rgba(255, 255, 255, 0.12);
 text-align: left;
-padding: 10px;
+padding: 12px 10px;
+color: #ffffff;
+font-size: 0.90rem;
+font-weight: 600;
+line-height: 1.3;
+letter-spacing: 0.03em;
+text-transform: uppercase;
 }
 
 .tabelaEstabelecimnetos tbody tr td{
-border-top:1px solid #dddddd;
-border-right: 1px solid #dddddd;
+border-top:1px solid #e5e7eb;
+border-right: 1px solid #e5e7eb;
 padding: 7px;
+color: #374151;
+background-color: #ffffff;
+font-size: 0.94rem;
+font-weight: 500;
+line-height: 1.45;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tabelaEstabelecimnetos tbody tr:nth-child(even) td{
+background-color: #f8fafc;
+}
+
+.tabelaEstabelecimnetos tbody tr:hover td{
+background-color: #f1f5f3;
+color: #1f2937;
 }
 
 .iconeDelete{
 margin-right: 10px;
+color: #b42318;
+cursor: pointer;
+font-size: 1.02rem;
+transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.iconeDelete:hover{
+color: #912018;
+transform: scale(1.05);
+opacity: 0.92;
+}
+
+.iconeDelete:active{
+transform: scale(0.96);
 }
 
 .tdBtn{
@@ -72,8 +172,292 @@ gap: 10px;
 
 .tdBtn button{
 padding: 10px;
-border-radius: 5px;
+border-radius: 8px;
+cursor: pointer;
+border: 1px solid #cbd5e1;
+background: linear-gradient(180deg, #ffffff 0%, #f8faf9 100%);
+color: #1f2937;
+font-family: 'Inter', sans-serif;
+font-size: 0.90rem;
+font-weight: 600;
+box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tdBtn button:hover{
+border-color: #4b7d67;
+background: #f3f7f4;
+color: #163126;
+transform: translateY(-1px);
+box-shadow: 0 8px 16px rgba(15, 23, 42, 0.10);
+}
+
+.tdBtn button:focus{
+outline: none;
+border-color: #2f5d50;
+box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12), 0 8px 16px rgba(15, 23, 42, 0.10);
+}
+
+.tdBtn button:active{
+transform: translateY(0);
+box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+} */
+
+
+.divPrincipal{
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+background: linear-gradient(180deg, #f4f7f5 0%, #eef2ef 50%, #e8eeea 100%);
+font-family: 'Inter', sans-serif;
+color: #1f2937;
+padding-bottom: 32px;
+}
+
+.divTitulo{
+padding: 24px 0 10px;
+margin-top: 20px;
+width: 85vw;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 16px;
+flex-wrap: wrap;
+}
+
+.divTitulo button{
+padding: 14px 22px;
+border-radius: 12px;
+cursor: pointer;
+border: 1px solid #2f5d50;
+/* background: linear-gradient(90deg, #2f5d50 0%, #3d6f61 100%); */
+background-color: #006837;
+color: #ffffff;
+font-family: 'Inter', sans-serif;
+font-size: 0.95rem;
+font-weight: 600;
+letter-spacing: 0.01em;
+box-shadow: 0 10px 22px rgba(47, 93, 80, 0.18);
+transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.divTitulo button:hover{
+transform: translateY(-2px);
+box-shadow: 0 14px 28px rgba(47, 93, 80, 0.24);
+/* background: linear-gradient(90deg, #264b40 0%, #355f54 100%); */
+background: #006837;
+border-color: #264b40;
+}
+
+.divTitulo button:focus{
+outline: none;
+box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.14), 0 14px 28px rgba(47, 93, 80, 0.24);
+}
+
+.divTitulo button:active{
+transform: translateY(0);
+box-shadow: 0 8px 16px rgba(47, 93, 80, 0.18);
+}
+
+.divTabela{
+border: 1px solid #d1d5db;
+width: 85vw;
+margin-top: 22px;
+padding: 0;
+border-radius: 16px;
+background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
+box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+overflow: hidden;
+}
+
+.divInput{
+padding: 18px 20px;
+background: linear-gradient(180deg, #f9fafb 0%, #f4f7f5 100%);
+border-bottom: 1px solid #e5e7eb;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 14px;
+flex-wrap: wrap;
+}
+
+.divInput input{
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    width: 25vw;
+    min-width: 240px;
+    background: #ffffff;
+    color: #1f2937;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.divInput input::placeholder{
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.divInput input:hover{
+    border-color: #006837;
+    background-color: #fcfdfc;
+}
+
+.divInput input:focus{
+    border-color: #006837;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12);
+    transform: translateY(-1px);
+}
+
+.tabelaEstabelecimnetos{
+width: 100%;
+border-collapse: collapse;
+background-color: #ffffff;
+}
+
+.tabelaEstabelecimnetos thead tr{
+/* background: linear-gradient(90deg, #1f4d3f 0%, #2f5d50 55%, #3d6f61 100%); */
+background: #006837;
+}
+
+.tabelaEstabelecimnetos thead tr th{
+border-top: none;
+border-right: 1px solid rgba(255, 255, 255, 0.12);
+text-align: left;
+padding: 14px 12px;
+color: #ffffff;
+font-size: 0.86rem;
+font-weight: 700;
+line-height: 1.3;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+white-space: nowrap;
+}
+
+.tabelaEstabelecimnetos thead tr th:last-child{
+border-right: none;
+}
+
+.tabelaEstabelecimnetos tbody tr td{
+border-top: 1px solid #e5e7eb;
+border-right: 1px solid #eef2f7;
+padding: 12px 10px;
+color: #374151;
+background-color: #ffffff;
+font-size: 0.94rem;
+font-weight: 500;
+line-height: 1.45;
+vertical-align: middle;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tabelaEstabelecimnetos tbody tr td:last-child{
+border-right: none;
+}
+
+.tabelaEstabelecimnetos tbody tr:nth-child(even) td{
+background-color: #f8fafc;
+}
+
+.tabelaEstabelecimnetos tbody tr:hover td{
+background-color: #eef6f1;
+color: #1f2937;
+}
+
+.iconeDelete{
+margin-right: 10px;
+color: #b42318;
+cursor: pointer;
+font-size: 1.05rem;
+transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+}
+
+.iconeDelete:hover{
+color: #912018;
+transform: scale(1.08);
+opacity: 0.95;
+filter: drop-shadow(0 3px 6px rgba(145, 32, 24, 0.18));
+}
+
+.iconeDelete:active{
+transform: scale(0.96);
+}
+
+.tdBtn{
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-wrap: wrap;
+}
+
+.tdBtn button{
+padding: 10px 14px;
+border-radius: 10px;
+cursor: pointer;
+border: 1px solid #cbd5e1;
+background: linear-gradient(180deg, #ffffff 0%, #f8faf9 100%);
+color: #1f2937;
+font-family: 'Inter', sans-serif;
+font-size: 0.89rem;
+font-weight: 600;
+line-height: 1.2;
+box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tdBtn button:hover{
+border-color: #006837;
+background: #f3f7f4;
+color: #163126;
+transform: translateY(-1px);
+box-shadow: 0 8px 16px rgba(15, 23, 42, 0.10);
+}
+
+.tdBtn button:focus{
+outline: none;
+border-color: #006837;
+box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12), 0 8px 16px rgba(15, 23, 42, 0.10);
+}
+
+.tdBtn button:active{
+transform: translateY(0);
+box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+}
+
+@media (max-width: 900px){
+.divTitulo{
+width: 92vw;
+}
+
+.divTabela{
+width: 92vw;
+}
+
+.divInput input{
+width: 100%;
+min-width: unset;
+}
+
+.tdBtn{
+justify-content: flex-start;
+}
+}
+
+.iconeVoltar{
+position: absolute;
+left: 20px;
+top: 90px;
 cursor: pointer;
 }
 
-
+.iconeVoltar:hover{
+opacity: 1;
+transform: translateY(-1px);
+}

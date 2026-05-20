@@ -34,7 +34,7 @@ overflow: hidden;
   overflow-y: auto;
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: #888 transparent; /* Firefox: thumb track */
-  max-height: 400px;
+  max-height: 300px;
 }
 
 /* Chrome, Safari, Edge */
@@ -55,56 +55,18 @@ overflow: hidden;
   background-color: #555;
 }
 
-.divInput{
-padding: 20px;
-background-color: #f9fafb;
-border-bottom: 1px solid #e5e7eb;
-}
-
-.divInput input{
-    padding: 15px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    width: 25vw;
-    background-color: #ffffff;
-    color: #1f2937;
-    outline: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-    line-height: 1.4;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.divInput input::placeholder{
-    color: #6b7280;
-    font-weight: 400;
-}
-
-.divInput input:hover{
-    border-color: #006837;
-    background-color: #fcfdfc;
-}
-
-.divInput input:focus{
-    border-color: #006837;
-    box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.12);
-    background-color: #ffffff;
-}
-
-.tabelaEstabelecimnetos{
+.tabelaLicencas{
 width: 100%;
 border-collapse: collapse;
 background-color: #ffffff;
 font-family: 'Inter', sans-serif;
 }
 
-.tabelaEstabelecimnetos thead tr{
-/* background: linear-gradient(90deg, #2f5d50 0%, #3d6f61 100%); */
+.tabelaLicencas thead tr{
 background: #006837;
 }
 
-.tabelaEstabelecimnetos thead tr th{
+.tabelaLicencas thead tr th{
 border-top: 1px solid rgba(255, 255, 255, 0.08);
 border-right: 1px solid rgba(255, 255, 255, 0.12);
 text-align: left;
@@ -121,7 +83,7 @@ z-index: 1;
 background: #006837;
 }
 
-.tabelaEstabelecimnetos tbody tr td{
+.tabelaLicencas tbody tr td{
 border-top: 1px solid #e5e7eb;
 border-right: 1px solid #e5e7eb;
 padding: 18px 10px;
@@ -133,36 +95,13 @@ line-height: 1.5;
 transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.tabelaEstabelecimnetos tbody tr:nth-child(even) td{
+.tabelaLicencas tbody tr:nth-child(even) td{
 background-color: #f8fafc;
 }
 
-.tabelaEstabelecimnetos tbody tr:hover td{
+.tabelaLicencas tbody tr:hover td{
 background-color: #f1f5f3;
 color: #1f2937;
-}
-
-.iconeDelete{
-margin-right: 10px;
-color: #b42318;
-cursor: pointer;
-font-size: 1.05rem;
-transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
-}
-
-.iconeDelete:hover{
-color: #912018;
-transform: scale(1.05);
-opacity: 0.9;
-}
-
-.iconeDelete:active{
-transform: scale(0.96);
-}
-
-.tdAcao{
-text-align: center;
-font-weight: 600;
 }
 
 .iconeVoltar{
@@ -177,32 +116,16 @@ opacity: 1;
 transform: translateY(-1px);
 }
 
-.loadingOverlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.28);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+.tituloSecao{
+font-size: 1.1rem;
+font-weight: 700;
+color: #1f2937;
+padding: 16px 20px 8px 20px;
+letter-spacing: -0.01em;
 }
 
-.spinner {
-  width: 28px;
-  height: 28px;
-  border: 3px solid rgba(255, 255, 255, 0.28);
-  border-top: 3px solid #ffffff;
-  border-radius: 50%;
-  animation: girar 0.8s linear infinite;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.04);
-}
-
-@keyframes girar {
-  to {
-    transform: rotate(360deg);
-  }
+.divisaoDiv{
+margin-bottom: 10px;
 }
 
 /* Responsividade */
@@ -210,17 +133,18 @@ transform: translateY(-1px);
   .divTabela {
     width: 92vw;
   }
-  .divInput input {
-    width: 100%;
-  }
-  .tabelaEstabelecimnetos thead tr th,
-  .tabelaEstabelecimnetos tbody tr td {
+  .tabelaLicencas thead tr th,
+  .tabelaLicencas tbody tr td {
     padding: 10px 6px;
     font-size: 0.8rem;
   }
   .divTitulo {
     font-size: 0.85rem;
     text-align: center;
+  }
+  .tituloSecao {
+    font-size: 0.95rem;
+    padding: 12px 16px 6px 16px;
   }
   .iconeVoltar {
     top: 80px;
@@ -232,19 +156,16 @@ transform: translateY(-1px);
   .divTabela {
     width: 96vw;
   }
-  .divInput {
-    padding: 12px;
-  }
-  .divInput input {
-    padding: 10px;
-    font-size: 0.85rem;
-  }
-  .tabelaEstabelecimnetos thead tr th,
-  .tabelaEstabelecimnetos tbody tr td {
+  .tabelaLicencas thead tr th,
+  .tabelaLicencas tbody tr td {
     padding: 8px 4px;
     font-size: 0.72rem;
   }
-  .tabelaEstabelecimnetos tbody tr td {
+  .tabelaLicencas tbody tr td {
     padding: 12px 4px;
+  }
+  .tituloSecao {
+    font-size: 0.85rem;
+    padding: 10px 12px 4px 12px;
   }
 }

@@ -37,37 +37,6 @@
 	-webkit-backdrop-filter: blur(4px);
 }
 
-.btnNotificacao{
-padding: 14px 22px;
-border-radius: 10px;
-cursor: pointer;
-border: 1px solid #2f5d50;
-background: #006837;
-color: #ffffff;
-font-family: 'Inter', sans-serif;
-font-size: 0.95rem;
-font-weight: 600;
-letter-spacing: 0.01em;
-box-shadow: 0 8px 20px rgba(47, 93, 80, 0.18);
-transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.btnNotificacao:hover{
-opacity: 0.9;
-transform: translateY(-1px);
-box-shadow: 0 12px 24px rgba(47, 93, 80, 0.22);
-border-color: #006837;
-}
-
-.btnNotificacao:focus{
-outline: none;
-box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.14), 0 12px 24px rgba(47, 93, 80, 0.22);
-}
-
-.btnNotificacao:active{
-transform: translateY(0);
-box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
-}
 
 .DialogContent {
 	background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
@@ -78,8 +47,8 @@ box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 90vw;
-	max-width: 500px;
-	max-height: 85vh;
+	max-width: 1000px;
+	max-height: 90vh;
 	padding: 28px;
 	animation: contentShow 180ms cubic-bezier(0.16, 1, 0.3, 1);
 	box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
@@ -92,22 +61,59 @@ box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
 }
 
 .divInput{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px 16px;
+  margin-top: 18px;
+}
+
+/* Responsividade: 2 colunas em tablets, 1 coluna em celulares */
+@media (max-width: 768px) {
+  .divInput {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .divInput {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .DialogContent {
+    padding: 16px;
+    width: 95vw;
+  }
+  .DialogTitle {
+    font-size: 1.1rem;
+  }
+  .btnSalvar {
+    width: 100%;
+    min-width: unset;
+  }
+  .itensDoc {
+    padding: 8px 10px;
+  }
+  .itensDoc label {
+    font-size: 0.75rem;
+  }
+}
+
+.divInput1{
 display: flex;
 flex-direction: column;
 margin-top: 16px;
 gap: 6px;
 }
 
-.divInput input,
-.divInput select{
+.divInput1 input{
 width: 100%;
-  height: 46px;
-  padding: 10px 12px;
-  font-size: 0.97rem;
+  /* height: 46px; */
+  padding: 10px 10px;
+  font-size: 0.8rem;
   font-weight: 500;
   font-family: 'Inter', sans-serif;
   border: 1px solid #cbd5e1;
-  border-radius: 10px;
+  border-radius: 5px;
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
   background: #ffffff;
@@ -115,31 +121,65 @@ width: 100%;
   box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
-.divInput input::placeholder{
+.divInput1 input::placeholder{
   color: #6b7280;
   font-weight: 400;
 }
 
-.divInput input:hover,
-.divInput select:hover{
+.divInput1 input:hover{
   border-color: #006837;
   background-color: #fcfdfc;
 }
 
-.divInput input:focus,
-.divInput select:focus{
+.divInput1 input:focus{
   border-color: #006837;
   background-color: #ffffff;
   transform: translateY(-1px);
 }
 
-.divInput label{
+.divInput1 label{
  font-size: 0.95rem;
  font-weight: 600;
  margin-bottom: 3px;
  color: #374151;
  letter-spacing: 0.01em;
 }
+
+.itensDoc{
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 10px 10px;
+border: 1px solid #d1d5db;
+border-radius: 5px;
+background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
+color: #374151;
+font-weight: 500;
+line-height: 1.4;
+transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.itensDoc input{
+min-width: 20px;
+min-height: 20px;
+accent-color: #006837;
+cursor: pointer;
+transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.itensDoc label{
+ font-size: 0.8rem;
+ font-weight: 600;
+ margin-bottom: 3px;
+ color: #374151;
+ letter-spacing: 0.01em;
+}
+
+.itensDoc input:hover{
+  border-color: #006837;
+  background-color: #fcfdfc;
+}
+
 
 .DialogTitle {
 	margin: 0;
@@ -202,28 +242,7 @@ margin-top: 32px;
 	box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
 }
 
-/* Responsividade para telas pequenas */
-@media (max-width: 480px) {
-	.DialogContent {
-		padding: 20px;
-		width: 95vw;
-	}
-	.DialogTitle {
-		font-size: 1.15rem;
-	}
-	.btnSalvar {
-		width: 100%;
-		min-width: unset;
-	}
-	.divInput input,
-	.divInput select {
-		height: 42px;
-		font-size: 0.9rem;
-	}
-}
-
 .IconButton {
-
 	all: unset;
 	font-family: 'Inter', sans-serif;
 	height: 32px;

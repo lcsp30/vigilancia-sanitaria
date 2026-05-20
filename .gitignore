@@ -12,6 +12,21 @@ dist
 dist-ssr
 *.local
 
+# Variáveis de ambiente (segurança)
+.env
+.env.local
+.env.*.local
+
+# Cache de build/desenvolvimento
+.cache
+.parcel-cache
+.eslintcache
+.stylelintcache
+
+# Arquivos de teste
+coverage
+.nyc_output
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +37,20 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+
+# Sistema operacional
+Thumbs.db
+*.pem
+
+# Misc
+.turbo
+.vercel
+.output
+
+.gitignore
