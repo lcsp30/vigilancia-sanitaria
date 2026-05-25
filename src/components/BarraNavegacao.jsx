@@ -18,6 +18,9 @@ function BarraNavegação(){
             <NavLink to={'/telaLicencas'} className={estilo.navLink}>
                Licenças
             </NavLink>
+            <NavLink to={'/admin'} className={estilo.navLink}>
+              Panel Admin
+            </NavLink>
             </div>
            
         </div>

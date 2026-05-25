@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.divPrincipal {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f4f7f5 0%, #eef2ef 100%);
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+  padding: 40px 24px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.subtitulo {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 32px;
+}
+
+/* Abas (tabs) */
+.abas {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 32px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.aba {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.aba:hover {
+  color: #006837;
+}
+
+.abaAtiva {
+  color: #006837;
+  border-bottom-color: #006837;
+  font-weight: 600;
+}
+
+/* Cartão */
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+.cardTitulo {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #1f2937;
+}
+
+/* Formulário */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.campoGrupo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campoGrupoFull {
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #1f2937;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  border-color: #006837;
+  box-shadow: 0 0 0 3px rgba(0, 104, 55, 0.12);
+}
+
+.select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #1f2937;
+  outline: none;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.select:focus {
+  border-color: #006837;
+  box-shadow: 0 0 0 3px rgba(0, 104, 55, 0.12);
+}
+
+.btnPrimario {
+  padding: 12px 32px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #006837;
+  color: #ffffff;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+.btnPrimario:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btnPrimario:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Tabela */
+.tabelaWrapper {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.tabela td {
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  color: #1f2937;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.tabela tr:hover td {
+  background: #f9fafb;
+}
+
+.badgeNivel {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badgeAdmin {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.badgeTecnico {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* Botões de ação na tabela */
+.botoesAcao {
+  display: flex;
+  gap: 8px;
+}
+
+.btnEditar {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.btnEditar:hover {
+  border-color: #006837;
+  color: #006837;
+  background: #f0fdf4;
+}
+
+.btnExcluir {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid #fca5a5;
+  background: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #dc2626;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.btnExcluir:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+
+/* Mensagens */
+.erro {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-top: 12px;
+}
+
+.sucesso {
+  color: #059669;
+  font-size: 0.9rem;
+  margin-top: 12px;
+}
+
+.carregando {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* Modal de confirmação */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.modal h3 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  color: #1f2937;
+}
+
+.modal p {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.modalBotoes {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btnCancelar {
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+}
+
+.btnConfirmarExcluir {
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  background: #dc2626;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.btnConfirmarExcluir:hover {
+  background: #b91c1c;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .divPrincipal {
+    padding: 24px 16px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .abas {
+    overflow-x: auto;
+  }
+}

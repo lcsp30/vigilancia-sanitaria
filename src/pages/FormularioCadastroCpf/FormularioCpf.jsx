@@ -12,6 +12,7 @@ function FormularioCpf(){
  const [erroCpf, setErroCpf] = useState('');
  const [dadoCep, setDadoCep] = useState('');
  const [dadoTelefone, setDadoTelefone] = useState('');
+ const hoje = new Date().toISOString().split('T')[0];
  let nav = useNavigate();
 
  let [chave, setChave] = useState(true);
@@ -102,176 +103,212 @@ function formatarTelefone(e){
 }
 
     return(
-        <div className={estilo.divPrincipal}>
-
+        <div className={estilo.page}>
+            <div className={estilo.header}>
+                <button type="button" className={estilo.btnVoltar} onClick={voltar}>
+                    <BiLogOut size={24} />
+                </button>
+                <div className={estilo.divTitulo}>
+                    <h2>Cadastro de Pessoa Física</h2>
+                    <p>Preencha os dados do estabelecimento</p>
+                </div>
+            </div>
             <div className={estilo.formCpf}>
                 <form onSubmit={enviarForm} className={estilo.formInterno}>
-                    <BiLogOut className={estilo.iconeVoltar} size={32} onClick={voltar}/>
-                    <div className={estilo.divTitulo}>
-                        <h2>Cadastro de Pessoa Física</h2>
-                    </div>
-            <div className={estilo.caixaCategoria}>
-                <div>
-                <label htmlFor="categoria_id" >Categoria: </label>
-                  <select name="categoria_id" value={selecionado} onChange={valorSelect} required>
-                    <option value="">Selecione a Categoria</option>
-                    <option value="1">Profissional Liberal</option>
-                    <option value="2">Autônomo</option>
-                  </select>
-                </div>
-            </div>
 
-             <div className={estilo.caixaInput}>
-                <div>
-                    <label htmlFor="tipo_estabelecimento">Tipo Estabelecimento:</label>
-                    <input name="tipo_estabelecimento" placeholder="Ex:Padaria" type="text" style={{width:"25vw"}} disabled={chave} required/>
-                </div>
-            </div>
+                    <div className={estilo.formContent}>
 
-            <div className={estilo.caixaInput}>
-                <div>
-                    <label htmlFor="nome">Nome:</label>
-                    <input name="nome" type="text" style={{width:"25vw"}} disabled={chave} required/>
-                </div>
-
-                <div>
-                    <label htmlFor="cpf">CPF: </label>
-                    <input name="cpf" type="text" value={dadoCpf} onChange={formatarCpf} disabled={chave} required/>
-                    {erroCpf && <p style={{ color: 'red', fontSize: '12px' , position:'absolute'}}>{erroCpf}</p>}
-                </div>
-            </div>
-            
-            <div className={estilo.caixaInput}>
-                <div>
-                    <label htmlFor="rg">RG:</label>
-                    <input name="rg" type="number" disabled={chave} required/>
-                </div>
-
-                <div>
-                    <label htmlFor="orgao_expedidor">Órgão Expedidor: </label>
-                    <input name="orgao_expedidor" type="text" disabled={chave} required/>
-                </div>
-
-                <div>
-                    <label htmlFor="data_expedicao_rg">Data da Expedição: </label>
-                    <input name="data_expedicao_rg" type="date" disabled={chave} required/>
-                </div>
-            </div>
-            {selecionado == "1" && 
-            <div className={estilo.caixaInput}>
-                <div>
-                    <label htmlFor="escolaridade">Escolaridade: </label>
-                    <input name="escolaridade" type="text" disabled={chave} required/>
-                </div>
-                <div>
-                    <label htmlFor="formacao_profissional">Formação Profissional: </label>
-                    <input name="formacao_profissional" type="text" disabled={chave} required/>
-                </div>
-            </div>}
-            {selecionado == "1" && 
-            <div className={estilo.caixaInput}>
-                <div>
-                    <label htmlFor="registro_conselho">Registro no Conselho: </label>
-                    <input name="registro_conselho" type="text" disabled={chave} required/>
-                </div>
-                <div>
-                    <label htmlFor="especializacao">Especialização: </label>
-                    <input name="especializacao" type="text" disabled={chave} required/>
-                </div>
-            </div>}
-            <div className={estilo.caixaInput}>
-                <div>
-                    <label htmlFor="nome_fantasia">Nome Fantasia: </label>
-                    <input name="nome_fantasia" type="text" style={{width:"25vw"}} disabled={chave} required/>
-                </div>
-                <div>
-                    <label htmlFor="data_inicio_funcionamento">Início de Funcionamento:</label>
-                    <input name="data_inicio_funcionamento" type="date" disabled={chave} required/>
-                </div>
-            </div>
-             <div className={estilo.caixaInput}>
-                                    <div>
-                                        <label htmlFor="atividade_principal">Atividade Principal: </label>
-                                        <input type="text" name="atividade_principal" style={{width:"25vw"}} disabled={chave} required/>
-                                    </div>
-
-                                     <div>
-                            <label htmlFor="divisao_tecnica">Divisão Técnica: </label>
-                            <select name="divisao_tecnica" disabled={chave} required>
-                                <option value="">Selecione a Divisão</option>
-                                <option value="DCQA">DCQA</option>
-                                <option value="DCSEP">DCSEP</option>
-                                <option value="DCDM">DCDM</option>
-                                <option value="DCSHT">DCSHT</option>
+                        {/* Categoria */}
+                        <div className={estilo.caixaCategoria}>
+                            <label htmlFor="categoria_id">Categoria:</label>
+                            <select name="categoria_id" value={selecionado} onChange={valorSelect} required>
+                                <option value="">Selecione a Categoria</option>
+                                <option value="1">Profissional Liberal</option>
+                                <option value="2">Autônomo</option>
                             </select>
-                    </div>
+                        </div>
+
+                        {/* Identificação */}
+                        <div className={estilo.section}>
+                            <div className={estilo.sectionTitle}>Identificação do Estabelecimento</div>
+                            <div className={estilo.sectionBody}>
+                                <div className={estilo.row}>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="nome_fantasia">Nome Fantasia</label>
+                                        <input name="nome_fantasia" type="text" className={estilo["w280"]} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="data_inicio_funcionamento">Início de Funcionamento</label>
+                                        <input name="data_inicio_funcionamento" type="date" className={estilo["w200"]} max={hoje} disabled={chave} required/>
+                                    </div>
+                                </div>
+                                <div className={estilo.row}>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="atividade_principal">Atividade Principal</label>
+                                        <input type="text" name="atividade_principal" className={estilo["w280"]} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="divisao_tecnica">Divisão Técnica</label>
+                                        <select name="divisao_tecnica" className={estilo["w200"]} disabled={chave} required>
+                                            <option value="">Selecione a Divisão</option>
+                                            <option value="DCQA">DCQA</option>
+                                            <option value="DCSEP">DCSEP</option>
+                                            <option value="DCDM">DCDM</option>
+                                            <option value="DCSHT">DCSHT</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className={estilo.row}>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="tipo_estabelecimento">Tipo Estabelecimento</label>
+                                        <input name="tipo_estabelecimento" placeholder="Ex: Padaria" type="text" className={estilo["w280"]} disabled={chave} required/>
+                                    </div>
+                                </div>
+                                
                             </div>
-            <div className={estilo.caixaInput}>
-                <div>
-                    <label htmlFor="endereco">Endereço: </label>
-                    <input name="endereco" type="text" style={{width:"25vw"}} disabled={chave} required/>
-                </div>
+                        </div>
 
-                <div>
-                    <label htmlFor="numero_endereco">Número: </label>
-                    <input name="numero_endereco"  type="number" disabled={chave} required/>
-                </div>
-            </div>
-            
-            <div className={estilo.caixaInput}>
-                <div>
-                    <label htmlFor="bairro">Bairro: </label>
-                    <input name="bairro" type="text" disabled={chave} required/>
-                </div>
+                        {/* Documentos */}
+                        <div className={estilo.section}>
+                            <div className={estilo.sectionTitle}>Responsável</div>
+                            <div className={estilo.sectionBody}>
+                                <div className={estilo.row}>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="nome">Nome</label>
+                                        <input name="nome" type="text" className={estilo["w280"]} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="cpf">CPF</label>
+                                        <input name="cpf" type="text" className={estilo["w200"]} value={dadoCpf} onChange={formatarCpf} disabled={chave} required/>
+                                        {erroCpf && <p className={estilo.errorMessage}>{erroCpf}</p>}
+                                    </div>
+                                </div>
+                                <div className={estilo.row}>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="rg">RG</label>
+                                        <input name="rg" type="number" className={estilo["w200"]} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="orgao_expedidor">Órgão Expedidor</label>
+                                        <input name="orgao_expedidor" type="text" className={estilo["w200"]} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="data_expedicao_rg">Data da Expedição</label>
+                                        <input name="data_expedicao_rg" type="date" className={estilo["w200"]} max={hoje} disabled={chave} required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                  <div>
-                        <label htmlFor="localidade">Localidade: </label>
-                        <input name="localidade" type="text" placeholder="Ex: Zona Rural, Gleba 13" disabled={chave} required/>
-                </div>
-            </div>
+                        {/* Formação (só se Profissional Liberal) */}
+                        {selecionado == "1" &&
+                            <div className={estilo.section}>
+                                <div className={estilo.sectionTitle}>Formação</div>
+                                <div className={estilo.sectionBody}>
+                                    <div className={estilo.row}>
+                                        <div className={estilo.field}>
+                                            <label htmlFor="escolaridade">Escolaridade</label>
+                                            <input name="escolaridade" type="text" className={estilo["w200"]} disabled={chave} required/>
+                                        </div>
+                                        <div className={estilo.field}>
+                                            <label htmlFor="formacao_profissional">Formação Profissional</label>
+                                            <input name="formacao_profissional" type="text" className={estilo["w200"]} disabled={chave} required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-            <div className={estilo.caixaInput}>
-                 <div>
-                    <label htmlFor="complemento_endereco">Complemento: </label>
-                    <input name="complemento_endereco"  type="text" disabled={chave} required/>
-                </div>
-            </div>
+                        {/* Registro (só se Profissional Liberal) */}
+                        {selecionado == "1" &&
+                            <div className={estilo.section}>
+                                <div className={estilo.sectionTitle}>Registro</div>
+                                <div className={estilo.sectionBody}>
+                                    <div className={estilo.row}>
+                                        <div className={estilo.field}>
+                                            <label htmlFor="registro_conselho">Registro no Conselho</label>
+                                            <input name="registro_conselho" type="text" className={estilo["w200"]} disabled={chave} required/>
+                                        </div>
+                                        <div className={estilo.field}>
+                                            <label htmlFor="especializacao">Especialização</label>
+                                            <input name="especializacao" type="text" className={estilo["w200"]} disabled={chave} required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-            <div className={estilo.caixaInput}>
-                <div>
-                    <label htmlFor="municipio">Município: </label>
-                    <input name="municipio" type="text" style={{width:"25vw"}} disabled={chave} required/>
-                </div>
+                        {/* Endereço */}
+                        <div className={estilo.section}>
+                            <div className={estilo.sectionTitle}>Endereço</div>
+                            <div className={estilo.sectionBody}>
+                                <div className={estilo.row}>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="endereco">Endereço</label>
+                                        <input name="endereco" type="text" className={estilo["w280"]} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="numero_endereco">Número</label>
+                                        <input name="numero_endereco" type="number" className={estilo["w80"]} disabled={chave} required/>
+                                    </div>
+                                </div>
+                                <div className={estilo.row}>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="bairro">Bairro</label>
+                                        <input name="bairro" type="text" className={estilo["w200"]} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="localidade">Localidade</label>
+                                        <input name="localidade" type="text" placeholder="Ex: Zona Rural, Gleba 13" className={estilo["w200"]} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="complemento_endereco">Complemento</label>
+                                        <input name="complemento_endereco" type="text" className={estilo["w200"]} disabled={chave} required/>
+                                    </div>
+                                </div>
+                                <div className={estilo.row}>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="municipio">Município</label>
+                                        <input name="municipio" type="text" className={estilo["w200"]} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="cep">CEP</label>
+                                        <input name="cep" type="text" className={estilo["w120"]} value={dadoCep} onChange={formatarCep} disabled={chave} required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                <div>
-                    <label htmlFor="cep">CEP: </label>
-                    <input name="cep" type="text" value={dadoCep} onChange={formatarCep} disabled={chave} required/>
-                </div>
-            </div>
-            <div className={estilo.caixaInput}>
-                <div>
-                     <label htmlFor="telefone">Telefone: </label>
-                     <input name="telefone" type="text" value={dadoTelefone} onChange={formatarTelefone} disabled={chave} required/>
-                </div>
+                        {/* Contato */}
+                        <div className={estilo.section}>
+                            <div className={estilo.sectionTitle}>Contato</div>
+                            <div className={estilo.sectionBody}>
+                                <div className={estilo.row}>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="telefone">Telefone</label>
+                                        <input name="telefone" type="text" className={estilo["w200"]} value={dadoTelefone} onChange={formatarTelefone} disabled={chave} required/>
+                                    </div>
+                                    <div className={estilo.field}>
+                                        <label htmlFor="email">E-mail</label>
+                                        <input name="email" type="text" className={estilo["w240"]} disabled={chave} required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                <div>
-                    <label htmlFor="email">E-mail: </label>
-                    <input name="email" type="text" disabled={chave} required/>
-                </div>
-                
-            </div>
+                        {/* Observações */}
+                        <div className={estilo.caixaObs}>
+                            <label htmlFor="obs">Observações</label>
+                            <textarea name="obs" disabled={chave}></textarea>
+                        </div>
 
-            <div className={estilo.caixaObs}>
-                <div>
-                    <label htmlFor="obs">Observações:</label>
-                    <textarea name="obs" disabled={chave}></textarea>
-                </div>
-            </div>
+                        {/* Botão */}
+                        <div className={estilo.caixaBtn}>
+                            <button type="submit">Cadastrar</button>
+                        </div>
 
-            <div className={estilo.caixaBtn}>
-                <button type="submit">Cadastrar</button>
-            </div>
-        </form>
+                    </div>
+                </form>
             </div>
         </div>
     );

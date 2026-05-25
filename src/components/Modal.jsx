@@ -57,7 +57,7 @@ function Modal({setExecultar}){
                         </div>
                         <div className={styles.divInput}>
                             <label htmlFor="data_notificacao">Data da Notificação</label>
-                            <input name="data_notificacao" type="date" min={hoje} required/>
+                            <input name="data_notificacao" type="date" required/>
                         </div>
                         <div className={styles.divBtnSalvar}>
                             <button type="submit" className={styles.btnSalvar}>Salvar</button>
