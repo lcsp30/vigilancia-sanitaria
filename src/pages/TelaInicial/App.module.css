@@ -1,114 +1,170 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* ============================================
+   Dashboard — Tela Inicial (App.module.css)
+   ============================================ */
 
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+/* ---- Layout Principal ---- */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  min-height: 100vh;
+  background: #f4f4f4;
+  color: #1f2937;
+  font-family: 'Inter', sans-serif;
 }
 
-.divPrincipal{
+/* ---- Principal (Sidebar + Conteúdo) ---- */
+
+.principal {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebarWrapper {
+  display: flex;
+}
+
+/* ---- Div Centro ---- */
+
+.divCentro {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.divLogo {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageDivTitulo{
+display: flex;
+flex-direction: column;
+}
+
+.imgLogo {
+  width: 100%;
+  height: 100%;
+}
+
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ---- Page Header ---- */
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #d2d6de;
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #022448;
+  margin: 0;
+}
+
+.pageSubtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #5f6570;
+  margin: 0;
+}
+
+/* ---- KPI Grid ---- */
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* ---- Secondary Grid ---- */
+
+.secondaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.placeholderCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  padding: 16px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  flex-direction: column;
-  background: linear-gradient(180deg, #f4f7f5 0%, #eef2ef 45%, #e7ede9 100%);
+  justify-content: center;
+  min-height: 100px;
+}
+
+.placeholderText {
   font-family: 'Inter', sans-serif;
-  color: #1f2937;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #9ca0a8;
 }
 
-.topo{
-padding: 24px 32px;
-/* background: linear-gradient(90deg, #1f4d3f 0%, #2f5d50 55%, #3d6f61 100%); */
-background-color: #006837;
-width: 100%;
-text-align: center;
-color: #ffffff;
-font-size: 1rem;
-font-weight: 700;
-line-height: 1.2;
-letter-spacing: -0.02em;
-box-shadow: 0 8px 24px rgba(15, 23, 42, 0.10);
-border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
+/* ---- Responsivo ---- */
 
-.caixaBtn{
-width: min(1200px, 90%);
-display: flex;
-justify-content: center;
-align-items: center;
-align-content: center;
-gap: 28px;
-min-height: calc(100vh - 110px);
-padding: 40px 20px;
-flex-wrap: wrap;
-}
-
-.btn{
-height: 120px;
-width: min(500px, 100%);
-cursor: pointer;
-border-radius: 18px;
-border: 1px solid #d1d5db;
-font-size: 1.15rem;
-font-weight: 600;
-font-family: 'Inter', sans-serif;
-letter-spacing: -0.01em;
-line-height: 1.3;
-background: linear-gradient(180deg, #ffffff 0%, #f8faf9 100%);
-color: #1f2937;
-box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-position: relative;
-overflow: hidden;
-}
-
-.btn::before{
-content: "";
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 6px;
-/* background: linear-gradient(90deg, #2f5d50 0%, #4b7d67 100%); */
-background-color: #006837;
-}
-
-.btn:hover{
-opacity: 1;
-transform: translateY(-4px);
-border-color: #006837;
-box-shadow: 0 16px 34px rgba(15, 23, 42, 0.14);
-background: linear-gradient(180deg, #ffffff 0%, #f3f7f4 100%);
-color: #163126;
-}
-
-.btn:focus{
-outline: none;
-border-color: #2f5d50;
-box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12), 0 16px 34px rgba(15, 23, 42, 0.14);
-}
-
-.btn:active{
-transform: translateY(-1px);
-box-shadow: 0 8px 18px rgba(15, 23, 42, 0.10);
-}
-
-/* Responsividade */
-@media (max-width: 600px) {
-  .topo {
-    padding: 18px 16px;
-    font-size: 0.9rem;
+@media (max-width: 1024px) {
+  .kpiGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .caixaBtn {
-    gap: 16px;
-    padding: 20px 16px;
-    min-height: calc(100vh - 80px);
+}
+
+@media (max-width: 768px) {
+  .sidebarWrapper {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    bottom: 0;
+    z-index: 200;
   }
-  .btn {
-    height: auto;
-    padding: 28px 20px;
-    font-size: 1rem;
-    width: 100%;
+
+  .sidebarWrapper.sidebarOpen {
+    display: flex;
+  }
+
+  .main {
+    padding: 16px;
+  }
+
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .kpiGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .secondaryGrid {
+    grid-template-columns: 1fr;
   }
 }

@@ -1,8 +1,12 @@
+// Gerencia usuários do sistema com duas abas (Cadastrar/Listar) — acesso restrito a admin (nível 1).
 import { useState, useEffect } from 'react';
 import { userService } from '../../services/userService';
+import Sidebar from '../../components/Sidebar';
+import TopAppBar from '../../components/TopAppBar/TopAppBar';
 import estilo from './estiloPanelAdmin.module.css';
 
 function PanelAdmin() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [abaAtiva, setAbaAtiva] = useState('cadastrar');
   const [usuarios, setUsuarios] = useState([]);
   const [carregando, setCarregando] = useState(true);
@@ -130,194 +134,224 @@ function PanelAdmin() {
   };
 
   return (
-    <div className={estilo.divPrincipal}>
-      <div className={estilo.container}>
-        <h1 className={estilo.titulo}>Painel Administrativo</h1>
-        <p className={estilo.subtitulo}>Gerencie os usuários do sistema</p>
+    <div className={estilo.page}>
+      {/* Topbar */}
+      <TopAppBar />
 
-        {/* Abas */}
-        <div className={estilo.abas}>
-          <button
-            className={`${estilo.aba} ${abaAtiva === 'cadastrar' ? estilo.abaAtiva : ''}`}
-            onClick={() => setAbaAtiva('cadastrar')}
-          >
-            {editandoId ? 'Editar Usuário' : 'Cadastrar Usuário'}
-          </button>
-          <button
-            className={`${estilo.aba} ${abaAtiva === 'listar' ? estilo.abaAtiva : ''}`}
-            onClick={() => setAbaAtiva('listar')}
-          >
-            Listar Usuários
-          </button>
+      <div className={estilo.principal}>
+        {/* Sidebar */}
+        <div
+          className={`${estilo.sidebarWrapper} ${
+            sidebarOpen ? estilo.sidebarOpen : ''
+          }`}
+        >
+          <Sidebar />
         </div>
 
-        {/* Mensagens */}
-        {erro && <p className={estilo.erro}>{erro}</p>}
-        {sucesso && <p className={estilo.sucesso}>{sucesso}</p>}
-
-        {/* Aba Cadastrar */}
-        {abaAtiva === 'cadastrar' && (
-          <div className={estilo.card}>
-            <h2 className={estilo.cardTitulo}>
-              {editandoId ? 'Editar Usuário' : 'Cadastrar Novo Usuário'}
-            </h2>
-            <form onSubmit={handleSubmit}>
-              <div className={estilo.formGrid}>
-                <div className={estilo.campoGrupo}>
-                  <label className={estilo.label} htmlFor="name">Nome</label>
-                  <input
-                    className={estilo.input}
-                    type="text"
-                    id="name"
-                    placeholder="Nome completo"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    required
-                  />
+        {/* Conteúdo */}
+        <div className={estilo.divCentro}>
+          <main className={estilo.main}>
+            <div className={estilo.container}>
+              {/* Page Header */}
+              <div className={estilo.pageHeader}>
+                <div>
+                  <h1 className={estilo.pageTitle}>Painel Administrativo</h1>
+                  <p className={estilo.pageSubtitle}>
+                    Gerencie os usuários do sistema
+                  </p>
                 </div>
+              </div>
 
-                <div className={estilo.campoGrupo}>
-                  <label className={estilo.label} htmlFor="name_user">Usuário</label>
-                  <input
-                    className={estilo.input}
-                    type="text"
-                    id="name_user"
-                    placeholder="Nome de usuário"
-                    value={form.name_user}
-                    onChange={(e) => setForm({ ...form, name_user: e.target.value })}
-                    required
-                  />
+              {/* Abas */}
+              <div className={estilo.abas}>
+                <button
+                  className={`${estilo.aba} ${abaAtiva === 'cadastrar' ? estilo.abaAtiva : ''}`}
+                  onClick={() => setAbaAtiva('cadastrar')}
+                >
+                  {editandoId ? 'Editar Usuário' : 'Cadastrar Usuário'}
+                </button>
+                <button
+                  className={`${estilo.aba} ${abaAtiva === 'listar' ? estilo.abaAtiva : ''}`}
+                  onClick={() => setAbaAtiva('listar')}
+                >
+                  Listar Usuários
+                </button>
+              </div>
+
+              {/* Mensagens */}
+              {erro && <p className={estilo.erro}>{erro}</p>}
+              {sucesso && <p className={estilo.sucesso}>{sucesso}</p>}
+
+              {/* Aba Cadastrar */}
+              {abaAtiva === 'cadastrar' && (
+                <div className={estilo.card}>
+                  <h2 className={estilo.cardTitulo}>
+                    {editandoId ? 'Editar Usuário' : 'Cadastrar Novo Usuário'}
+                  </h2>
+                  <form onSubmit={handleSubmit}>
+                    <div className={estilo.formGrid}>
+                      <div className={estilo.campoGrupo}>
+                        <label className={estilo.label} htmlFor="name">Nome</label>
+                        <input
+                          className={estilo.input}
+                          type="text"
+                          id="name"
+                          placeholder="Nome completo"
+                          value={form.name}
+                          onChange={(e) => setForm({ ...form, name: e.target.value })}
+                          required
+                        />
+                      </div>
+
+                      <div className={estilo.campoGrupo}>
+                        <label className={estilo.label} htmlFor="name_user">Usuário</label>
+                        <input
+                          className={estilo.input}
+                          type="text"
+                          id="name_user"
+                          placeholder="Nome de usuário"
+                          value={form.name_user}
+                          onChange={(e) => setForm({ ...form, name_user: e.target.value })}
+                          required
+                        />
+                      </div>
+
+                      <div className={estilo.campoGrupo}>
+                        <label className={estilo.label} htmlFor="password">
+                          {editandoId ? 'Nova Senha (deixe em branco para manter)' : 'Senha'}
+                        </label>
+                        <input
+                          className={estilo.input}
+                          type="password"
+                          id="password"
+                          placeholder={editandoId ? 'Deixe em branco para manter' : 'Digite a senha'}
+                          value={form.password}
+                          onChange={(e) => setForm({ ...form, password: e.target.value })}
+                          required={!editandoId}
+                        />
+                      </div>
+
+                      <div className={estilo.campoGrupo}>
+                        <label className={estilo.label} htmlFor="nivel_acesso">Nível de Acesso</label>
+                        <select
+                          className={estilo.select}
+                          id="nivel_acesso"
+                          value={form.nivel_acesso}
+                          onChange={(e) => setForm({ ...form, nivel_acesso: Number(e.target.value) })}
+                        >
+                          <option value={1}>Admin</option>
+                          <option value={2}>Técnico Visa</option>
+                        </select>
+                      </div>
+
+                      <div className={estilo.formAcoes}>
+                        <button className={estilo.btnPrimario} type="submit" disabled={salvando}>
+                          {salvando ? 'Salvando...' : editandoId ? 'Atualizar' : 'Cadastrar'}
+                        </button>
+                        {editandoId && (
+                          <button
+                            type="button"
+                            className={estilo.btnCancelar}
+                            onClick={handleCancelarEdicao}
+                          >
+                            Cancelar
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </form>
                 </div>
+              )}
 
-                <div className={estilo.campoGrupo}>
-                  <label className={estilo.label} htmlFor="password">
-                    {editandoId ? 'Nova Senha (deixe em branco para manter)' : 'Senha'}
-                  </label>
-                  <input
-                    className={estilo.input}
-                    type="password"
-                    id="password"
-                    placeholder={editandoId ? 'Deixe em branco para manter' : 'Digite a senha'}
-                    value={form.password}
-                    onChange={(e) => setForm({ ...form, password: e.target.value })}
-                    required={!editandoId}
-                  />
-                </div>
+              {/* Aba Listar */}
+              {abaAtiva === 'listar' && (
+                <div className={estilo.card}>
+                  <h2 className={estilo.cardTitulo}>Usuários Cadastrados</h2>
 
-                <div className={estilo.campoGrupo}>
-                  <label className={estilo.label} htmlFor="nivel_acesso">Nível de Acesso</label>
-                  <select
-                    className={estilo.select}
-                    id="nivel_acesso"
-                    value={form.nivel_acesso}
-                    onChange={(e) => setForm({ ...form, nivel_acesso: Number(e.target.value) })}
-                  >
-                    <option value={1}>Admin</option>
-                    <option value={2}>Técnico Visa</option>
-                  </select>
-                </div>
+                  {carregando ? (
+                    <div className={estilo.carregando}>
+                      <div className={estilo.spinner}></div>
+                      <span className={estilo.carregandoTexto}>Carregando usuários...</span>
+                    </div>
+                  ) : usuarios.length === 0 ? (
+                    <p className={estilo.emptyState}>Nenhum usuário encontrado.</p>
 
-                <div style={{ display: 'flex', gap: 12, gridColumn: '1 / -1' }}>
-                  <button className={estilo.btnPrimario} type="submit" disabled={salvando}>
-                    {salvando ? 'Salvando...' : editandoId ? 'Atualizar' : 'Cadastrar'}
-                  </button>
-                  {editandoId && (
-                    <button
-                      type="button"
-                      className={estilo.btnCancelar}
-                      onClick={handleCancelarEdicao}
-                    >
-                      Cancelar
-                    </button>
+                  ) : (
+                    <div className={estilo.tabelaWrapper}>
+                      <table className={estilo.tabela}>
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Usuário</th>
+                            <th>Nível de Acesso</th>
+                            <th>Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {usuarios.map((usuario) => (
+                            <tr key={usuario.id}>
+                              <td>{usuario.id}</td>
+                              <td>{usuario.name}</td>
+                              <td>{usuario.name_user}</td>
+                              <td>
+                                <span className={nivelClasse(usuario.nivel_acesso)}>
+                                  {nivelLabel(usuario.nivel_acesso)}
+                                </span>
+                              </td>
+                              <td>
+                                <div className={estilo.botoesAcao}>
+                                  <button
+                                    className={estilo.btnEditar}
+                                    onClick={() => handleEditar(usuario)}
+                                  >
+                                    Editar
+                                  </button>
+                                  <button
+                                    className={estilo.btnExcluir}
+                                    onClick={() => setExcluirId(usuario.id)}
+                                  >
+                                    Excluir
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   )}
                 </div>
-              </div>
-            </form>
-          </div>
-        )}
+              )}
 
-        {/* Aba Listar */}
-        {abaAtiva === 'listar' && (
-          <div className={estilo.card}>
-            <h2 className={estilo.cardTitulo}>Usuários Cadastrados</h2>
-
-            {carregando ? (
-              <p className={estilo.carregando}>Carregando usuários...</p>
-            ) : usuarios.length === 0 ? (
-              <p style={{ color: '#6b7280' }}>Nenhum usuário encontrado.</p>
-            ) : (
-              <div className={estilo.tabelaWrapper}>
-                <table className={estilo.tabela}>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nome</th>
-                      <th>Usuário</th>
-                      <th>Nível de Acesso</th>
-                      <th>Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {usuarios.map((usuario) => (
-                      <tr key={usuario.id}>
-                        <td>{usuario.id}</td>
-                        <td>{usuario.name}</td>
-                        <td>{usuario.name_user}</td>
-                        <td>
-                          <span className={nivelClasse(usuario.nivel_acesso)}>
-                            {nivelLabel(usuario.nivel_acesso)}
-                          </span>
-                        </td>
-                        <td>
-                          <div className={estilo.botoesAcao}>
-                            <button
-                              className={estilo.btnEditar}
-                              onClick={() => handleEditar(usuario)}
-                            >
-                              Editar
-                            </button>
-                            <button
-                              className={estilo.btnExcluir}
-                              onClick={() => setExcluirId(usuario.id)}
-                            >
-                              Excluir
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Modal de confirmação de exclusão */}
-        {excluirId && (
-          <div className={estilo.modalOverlay} onClick={() => setExcluirId(null)}>
-            <div className={estilo.modal} onClick={(e) => e.stopPropagation()}>
-              <h3>Confirmar Exclusão</h3>
-              <p>Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.</p>
-              <div className={estilo.modalBotoes}>
-                <button
-                  className={estilo.btnCancelar}
-                  onClick={() => setExcluirId(null)}
-                  disabled={excluindo}
-                >
-                  Cancelar
-                </button>
-                <button
-                  className={estilo.btnConfirmarExcluir}
-                  onClick={handleConfirmarExclusao}
-                  disabled={excluindo}
-                >
-                  {excluindo ? 'Excluindo...' : 'Confirmar Exclusão'}
-                </button>
-              </div>
+              {/* Modal de confirmação de exclusão */}
+              {excluirId && (
+                <div className={estilo.modalOverlay} onClick={() => setExcluirId(null)}>
+                  <div className={estilo.modal} onClick={(e) => e.stopPropagation()}>
+                    <h3>Confirmar Exclusão</h3>
+                    <p>Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.</p>
+                    <div className={estilo.modalBotoes}>
+                      <button
+                        className={estilo.btnCancelar}
+                        onClick={() => setExcluirId(null)}
+                        disabled={excluindo}
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        className={estilo.btnConfirmarExcluir}
+                        onClick={handleConfirmarExclusao}
+                        disabled={excluindo}
+                      >
+                        {excluindo ? 'Excluindo...' : 'Confirmar Exclusão'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          </main>
+        </div>
       </div>
     </div>
   );

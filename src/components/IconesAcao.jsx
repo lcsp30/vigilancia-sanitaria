@@ -1,3 +1,5 @@
+// Renderiza botões de ação (excluir/exportar) para cada linha de tabela de estabelecimentos.
+// TODO: Mover estilos inline para CSS Modules (estiloIconesAcao.module.css).
 import { AiOutlineExport, AiTwotoneDelete } from "react-icons/ai";
 
 function IconesAcao(){

@@ -1,3 +1,4 @@
+// Redireciona ao login qualquer usuário não autenticado que tentar acessar uma rota protegida.
 import { Navigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 

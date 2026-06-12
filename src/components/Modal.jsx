@@ -1,19 +1,22 @@
+// Abre um modal com formulário para gerar uma nova notificação de estabelecimento.
 import * as Dialog from "@radix-ui/react-dialog";
 import styles from "./cssComponents/estiloModal.module.css";
 import api from "../services/api";
 import { useState } from "react";
 
-
+/**
+ * @param {Object} props
+ * @param {Function} props.setExecultar - Callback para forçar refresh da lista pai após envio
+ */
 function Modal({setExecultar}){
     const hoje = new Date().toISOString().split("T")[0];
-    let [fechar, setFechar] = useState(false);
-    
+    let [fechar, setFechar] = useState(false); // FIXME: nome invertido — true = aberto. Renomear para "isOpen"
+
+   // Envia os dados do formulário para o endpoint de notificações e fecha o modal.
    function enviarDados(e){
         e.preventDefault();
-
         let dados = new FormData(e.target);
         let dadosJson = Object.fromEntries(dados);
-        
         api.post('estabelecimentos_notificados', dadosJson)
         .then(function(response){
             console.log(response.data);
@@ -39,26 +42,29 @@ function Modal({setExecultar}){
 					Adicione os dados para gerar uma nova notificação.
 				</Dialog.Description>
 					<form className={styles.formModal} onSubmit={enviarDados}>
-                        <div className={styles.divInput}>
-                            <label htmlFor="nome_estabelecimento">Nome do Estabelecimento</label>
-                            <input name="nome_estabelecimento" type="text" required/>
-                        </div>
-                        <div className={styles.divInput}>
-                            <label htmlFor="nome_proprietario">Nome do Proprietario</label>
-                            <input name="nome_proprietario" type="text" required/>
-                        </div>
-                        <div className={styles.divInput}>
-                            <label htmlFor="contato">Contato</label>
-                            <input name="contato" type="text" required/>
-                        </div>
-                        <div className={styles.divInput}>
-                            <label htmlFor="situacao">Situação</label>
-                            <input name="situacao" type="text" required/>
-                        </div>
-                        <div className={styles.divInput}>
+                        <div className={styles.gridInput}>
+                            <div className={styles.divInput}>
+                                <label htmlFor="nome_estabelecimento">Nome do Estabelecimento</label>
+                                <input name="nome_estabelecimento" type="text" required/>
+                            </div>
+                            <div className={styles.divInput}>
+                                <label htmlFor="nome_proprietario">Nome do Proprietario</label>
+                                <input name="nome_proprietario" type="text" required/>
+                            </div>
+                            <div className={styles.divInput}>
+                                <label htmlFor="contato">Contato</label>
+                                <input name="contato" type="text" required/>
+                            </div>
+                            <div className={styles.divInput}>
+                                <label htmlFor="situacao">Situação</label>
+                                <input name="situacao" type="text" required/>
+                            </div>
+                             <div className={styles.divInput}>
                             <label htmlFor="data_notificacao">Data da Notificação</label>
                             <input name="data_notificacao" type="date" required/>
                         </div>
+                        </div>
+                       
                         <div className={styles.divBtnSalvar}>
                             <button type="submit" className={styles.btnSalvar}>Salvar</button>
                         </div>

@@ -1,9 +1,16 @@
+// Modal de edição de dados cadastrais: carrega dados, aplica máscaras (CPF/CNPJ/CEP/telefone), valida dígitos e envia normalizados.
 import * as Dialog from "@radix-ui/react-dialog";
 import styles from "./cssComponents/estiloModalEditarEstb.module.css";
 import api from "../services/api";
 import { useState, useEffect } from "react";
 import { cpf, cnpj } from "cpf-cnpj-validator";
 
+/**
+ * @param {Object} props
+ * @param {number} props.id - ID do estabelecimento
+ * @param {string} props.tipoEstabelecimento - "cpf" ou "cnpj"
+ * @param {Function} props.menuDoc - Callback para fechar menu dropdown pai
+ */
 function ModalEditarEstb({ id, tipoEstabelecimento, menuDoc }) {
   let [fechar, setFechar] = useState(false);
   let [dadosEstb, setDadosEstb] = useState({});
@@ -11,6 +18,7 @@ function ModalEditarEstb({ id, tipoEstabelecimento, menuDoc }) {
   const [erroCnpj, setErroCnpj] = useState("");
   const [erroCpf, setErroCpf] = useState("");
 
+  // Busca dados cadastrais do estabelecimento pelo ID e tipo (CPF ou CNPJ).
   function buscarDados() {
     if (tipoEstabelecimento == "cnpj") {
       api
@@ -21,8 +29,8 @@ function ModalEditarEstb({ id, tipoEstabelecimento, menuDoc }) {
           setDados({ cnpj: dados.cnpj, cpf: dados.cpf, cep: dados.cep, telefone: dados.telefone });
           console.log(dados);
         })
-        .catch(function (error) {
-          console.log(error.data);
+        .catch(function (erro) {
+          console.log(erro.data);
         });
     } else if (tipoEstabelecimento == "cpf") {
       api
@@ -39,6 +47,7 @@ function ModalEditarEstb({ id, tipoEstabelecimento, menuDoc }) {
     }
   }
 
+  // Aplica máscara de CNPJ (##.###.###/####-##) removendo não-dígitos e limitando a 18 caracteres.
   const mascararCnpj = (valor) => {
     return valor
       .replace(/\D/g, "")
@@ -49,6 +58,7 @@ function ModalEditarEstb({ id, tipoEstabelecimento, menuDoc }) {
       .substring(0, 18);
   };
 
+  // Aplica máscara de CPF (###.###.###-##) removendo não-dígitos e limitando a 14 caracteres.
   const mascararCpf = (valor) => {
     return valor
       .replace(/\D/g, "")
@@ -58,6 +68,7 @@ function ModalEditarEstb({ id, tipoEstabelecimento, menuDoc }) {
       .substring(0, 14);
   };
 
+  // Aplica máscara de CEP (#####-###) removendo não-dígitos e limitando a 9 caracteres.
   const mascararCep = (valor) => {
     return valor
       .replace(/\D/g, "")
@@ -65,6 +76,7 @@ function ModalEditarEstb({ id, tipoEstabelecimento, menuDoc }) {
       .substring(0, 9);
   };
 
+  // Aplica máscara de telefone ((##) #####-####) removendo não-dígitos e limitando a 15 caracteres.
   const mascararTelefone = (valor) => {
     return valor
       .replace(/\D/g, "")
@@ -73,6 +85,7 @@ function ModalEditarEstb({ id, tipoEstabelecimento, menuDoc }) {
       .substring(0, 15);
   };
 
+  // Handler unificado de input: aplica máscara conforme o campo e valida dígito verificador ao atingir comprimento completo.
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let valorComMascara = value;
@@ -108,6 +121,7 @@ function ModalEditarEstb({ id, tipoEstabelecimento, menuDoc }) {
     }
   };
 
+// Envia formulário de edição CNPJ com campos normalizados (apenas dígitos) para o backend.
 function enviarFormCnpj(e){
     e.preventDefault();
 
@@ -137,7 +151,7 @@ function enviarFormCnpj(e){
     });
   }
 
-
+// Envia formulário de edição CPF com campos normalizados (apenas dígitos) para o backend.
 function enviarFormCpf(e){
    e.preventDefault();
 
@@ -183,35 +197,27 @@ function enviarFormCpf(e){
           {tipoEstabelecimento == "cnpj" && (
             <form key={dadosEstb.updated_at} className={styles.formModal} onSubmit={enviarFormCnpj}>
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="razao_social">Razão Social:</label>
                   <input
                     name="razao_social"
                     defaultValue={dadosEstb.razao_social}
-                    style={{ width: "33vw" }}
                     type="text"
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="cnpj">CNPJ: </label>
                   <input
                     name="cnpj"
                     type="text"
                     value={dados.cnpj}
-                    style={{ width: "33vw" }}
                     onChange={handleInputChange}
                     required
                   />
                   {erroCnpj && (
-                    <p
-                      style={{
-                        color: "red",
-                        fontSize: "12px",
-                        position: "absolute",
-                      }}
-                    >
+                    <p className={styles.errorMsg}>
                       {erroCnpj}
                     </p>
                   )}
@@ -219,36 +225,33 @@ function enviarFormCpf(e){
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="nome_fantasia">Nome Fantasia: </label>
                   <input
                     name="nome_fantasia"
                     defaultValue={dadosEstb.nome_fantasia}
                     type="text"
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="atividade_principal">Atividade Principal: </label>
                   <input
                     type="text"
                     name="atividade_principal"
                     defaultValue={dadosEstb.atividade_principal}
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="divisao_tecnica">Divisão Técnica: </label>
                   <select
                     name="divisao_tecnica"
                     defaultValue={dadosEstb.divisao_tecnica}
-                    style={{ width: "33vw" }}
                     required
                   >
                     <option value="">Selecione a Divisão</option>
@@ -261,135 +264,124 @@ function enviarFormCpf(e){
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="insc_estadual">Insc.Estadual:</label>
                   <input
                     name="insc_estadual"
                     defaultValue={dadosEstb.insc_estadual}
                     type="text"
-                    style={{ width: "21.7vw" }}
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="insc_municipal">Insc.Municipal: </label>
                   <input
                     name="insc_municipal"
                     defaultValue={dadosEstb.insc_municipal}
                     type="text"
-                    style={{ width: "21.7vw" }}
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="cnes">CNES (Estabel. de Saúde): </label>
                   <input
                     name="cnes"
                     defaultValue={dadosEstb.cnes}
                     type="text"
-                    style={{ width: "21.7vw" }}
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="endereco">Endereço: </label>
                   <input
                     name="endereco"
                     defaultValue={dadosEstb.endereco}
                     type="text"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="numero_endereco">Número: </label>
                   <input
                     name="numero_endereco"
                     defaultValue={dadosEstb.numero_endereco}
                     type="text"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="bairro">Bairro: </label>
                   <input
                     name="bairro"
                     defaultValue={dadosEstb.bairro}
                     type="text"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="localidade">Localidade: </label>
                   <input
                     name="localidade"
                     defaultValue={dadosEstb.localidade}
                     type="text"
                     placeholder="Ex: Zona Rural, Gleba 13"
-                    style={{ width: "21.7vw" }}
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="municipio">Município: </label>
                   <input
                     name="municipio"
                     defaultValue={dadosEstb.municipio}
                     type="text"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="cep">CEP: </label>
                   <input
                     name="cep"
                     type="text"
                     value={dados.cep || ''}
                     onChange={handleInputChange}
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="telefone">Telefone: </label>
                   <input
                     name="telefone"
                     type="text"
                     value={dados.telefone || ''}
                     onChange={handleInputChange}
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="email">E-mail: </label>
                   <input
                     name="email"
                     defaultValue={dadosEstb.email}
                     type="text"
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="data_inicio_funcionamento">
                     Início de Funcionamento:{" "}
                   </label>
@@ -397,19 +389,17 @@ function enviarFormCpf(e){
                     name="data_inicio_funcionamento"
                     defaultValue={dadosEstb.data_inicio_funcionamento}
                     type="date"
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="natureza_juridica">Natureza Jurídica: </label>
                   <select
                     name="natureza_juridica"
                     defaultValue={dadosEstb.natureza_juridica}
-                    style={{ width: "33vw" }}
                     required
                   >
                     <option value="">Selecione</option>
@@ -422,85 +412,74 @@ function enviarFormCpf(e){
                   </select>
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="nome_responsavel">Nome:</label>
                   <input
                     name="nome_responsavel"
                     defaultValue={dadosEstb.nome_responsavel}
                     type="text"
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="cpf">CPF: </label>
                   <input
                     name="cpf"
                     value={dados.cpf}
                     onChange={handleInputChange}
                     type="text"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                   {erroCpf && (
-                    <p
-                      style={{
-                        color: "red",
-                        fontSize: "12px",
-                        position: "absolute",
-                      }}
-                    >
+                    <p className={styles.errorMsg}>
                       {erroCpf}
                     </p>
                   )}
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="rg">RG:</label>
                   <input
                     name="rg"
                     defaultValue={dadosEstb.rg}
                     type="number"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="orgao_expedidor">Órgão Expedidor: </label>
                   <input
                     name="orgao_expedidor"
                     defaultValue={dadosEstb.orgao_expedidor}
                     type="text"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="data_expedicao_rg">Data da Expedição: </label>
                   <input
                     name="data_expedicao_rg"
                     defaultValue={dadosEstb.data_expedicao_rg}
                     type="date"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroupFull}>
                   <label htmlFor="obs">Observações:</label>
                   <textarea
                     name="obs"
                     defaultValue={dadosEstb.obs}
-                    style={{ width: "67vw", height: "40px" }}
+                    className={styles.textAreaField}
                   ></textarea>
                 </div>
               </div>
@@ -516,110 +495,82 @@ function enviarFormCpf(e){
           {tipoEstabelecimento == "cpf" && (
             <form key={dadosEstb.updated_at} className={styles.formModal} onSubmit={enviarFormCpf}>
               <div className={styles.divInput}>
-                <div>
-                  <label htmlFor="categoria_id">Categoria: </label>
-                  <select
-                    name="categoria_id"
-                    defaultValue={dadosEstb.categoria_id}
-                    style={{ width: "33vw" }}
-                    required
-                  >
-                    <option value="">Selecione a Categoria</option>
-                    <option value="1">Profissional Liberal</option>
-                    <option value="2">Autônomo</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="tipo_estabelecimento">Tipo Estabelecimento:</label>
-                  <input
-                    name="tipo_estabelecimento"
-                    defaultValue={dadosEstb.tipo_estabelecimento}
-                    placeholder="Ex:Padaria"
-                    type="text"
-                    style={{ width: "33vw" }}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="nome">Nome:</label>
                   <input
                     name="nome"
                     type="text"
                     defaultValue={dadosEstb.nome}
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="cpf">CPF: </label>
                   <input
                     name="cpf"
                     type="text"
                     value={dados.cpf}
                     onChange={handleInputChange}
-                    style={{ width: "33vw" }}
                     required
                   />
                   {erroCpf && (
-                    <p
-                      style={{
-                        color: "red",
-                        fontSize: "12px",
-                        position: "absolute",
-                      }}
-                    >
+                    <p className={styles.errorMsg}>
                       {erroCpf}
                     </p>
                   )}
                 </div>
+
+                <div className={styles.inputGroup}>
+                  <label htmlFor="tipo_estabelecimento">Tipo Estabelecimento:</label>
+                  <input
+                    name="tipo_estabelecimento"
+                    defaultValue={dadosEstb.tipo_estabelecimento}
+                    placeholder="Ex:Padaria"
+                    type="text"
+                    required
+                  />
+                </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="rg">RG:</label>
-                  <input name="rg" type="number" style={{ width: "21.7vw" }} defaultValue={dadosEstb.rg} required />
+                  <input name="rg" type="number" defaultValue={dadosEstb.rg} required />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="orgao_expedidor">Órgão Expedidor: </label>
                   <input
                     name="orgao_expedidor"
                     defaultValue={dadosEstb.orgao_expedidor}
                     type="text"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="data_expedicao_rg">Data da Expedição: </label>
                   <input
                     name="data_expedicao_rg"
                     defaultValue={dadosEstb.data_expedicao_rg}
                     type="date"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
               </div>
               {dadosEstb.categoria_id == 1 && (
                 <div className={styles.divInput}>
-                  <div>
+                  <div className={styles.inputGroup}>
                     <label htmlFor="escolaridade">Escolaridade: </label>
                     <input
                       name="escolaridade"
                       defaultValue={dadosEstb.escolaridade}
                       type="text"
-                      style={{ width: "33vw" }}
                       required
                     />
                   </div>
-                  <div>
+                  <div className={styles.inputGroup}>
                     <label htmlFor="formacao_profissional">
                       Formação Profissional:{" "}
                     </label>
@@ -627,7 +578,6 @@ function enviarFormCpf(e){
                       name="formacao_profissional"
                       defaultValue={dadosEstb.formacao_profissional}
                       type="text"
-                      style={{ width: "33vw" }}
                       required
                     />
                   </div>
@@ -635,7 +585,7 @@ function enviarFormCpf(e){
               )}
               {dadosEstb.categoria_id == 1 && (
                 <div className={styles.divInput}>
-                  <div>
+                  <div className={styles.inputGroup}>
                     <label htmlFor="registro_conselho">
                       Registro no Conselho:{" "}
                     </label>
@@ -643,34 +593,31 @@ function enviarFormCpf(e){
                       name="registro_conselho"
                       defaultValue={dadosEstb.registro_conselho}
                       type="text"
-                      style={{ width: "33vw" }}
                       required
                     />
                   </div>
-                  <div>
+                  <div className={styles.inputGroup}>
                     <label htmlFor="especializacao">Especialização: </label>
                     <input
                       name="especializacao"
                       defaultValue={dadosEstb.especializacao}
                       type="text"
-                      style={{ width: "33vw" }}
                       required
                     />
                   </div>
                 </div>
               )}
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="nome_fantasia">Nome Fantasia: </label>
                   <input
                     name="nome_fantasia"
                     defaultValue={dadosEstb.nome_fantasia}
                     type="text"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="data_inicio_funcionamento">
                     Início de Funcionamento:
                   </label>
@@ -678,30 +625,27 @@ function enviarFormCpf(e){
                     name="data_inicio_funcionamento"
                     defaultValue={dadosEstb.data_inicio_funcionamento}
                     type="date"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="atividade_principal">Atividade Principal: </label>
                   <input
                     type="text"
                     name="atividade_principal"
                     defaultValue={dadosEstb.atividade_principal}
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="divisao_tecnica">Divisão Técnica: </label>
                   <select
                     name="divisao_tecnica"
                     defaultValue={dadosEstb.divisao_tecnica}
-                    style={{ width: "33vw" }}
                     required
                   >
                     <option value="">Selecione a Divisão</option>
@@ -712,104 +656,101 @@ function enviarFormCpf(e){
                   </select>
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="endereco">Endereço: </label>
                   <input
                     name="endereco"
                     defaultValue={dadosEstb.endereco}
                     type="text"
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="numero_endereco">Número: </label>
                   <input
                     name="numero_endereco"
                     defaultValue={dadosEstb.numero_endereco}
                     type="number"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="bairro">Bairro: </label>
-                  <input name="bairro" defaultValue={dadosEstb.bairro} type="text" style={{ width: "21.7vw" }} required />
+                  <input name="bairro" defaultValue={dadosEstb.bairro} type="text" required />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="localidade">Localidade: </label>
                   <input
                     name="localidade"
                     defaultValue={dadosEstb.localidade}
                     type="text"
                     placeholder="Ex: Zona Rural, Gleba 13"
-                    style={{ width: "21.7vw" }}
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="complemento_endereco">Complemento: </label>
                   <input
                     name="complemento_endereco"
                     defaultValue={dadosEstb.complemento_endereco}
                     type="text"
-                    style={{ width: "21.7vw" }}
                   />
                 </div>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="municipio">Município: </label>
                   <input
                     name="municipio"
                     defaultValue={dadosEstb.municipio}
                     type="text"
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="cep">CEP: </label>
                   <input
                     name="cep"
                     type="text"
                     value={dados.cep || ''}
                     onChange={handleInputChange}
-                    style={{ width: "21.7vw" }}
                     required
                   />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="telefone">Telefone: </label>
                   <input
                     name="telefone"
                     type="text"
                     value={dados.telefone || ''}
                     onChange={handleInputChange}
-                    style={{ width: "33vw" }}
                     required
                   />
                 </div>
 
-                <div>
+                <div className={styles.inputGroup}>
                   <label htmlFor="email">E-mail: </label>
-                  <input name="email" defaultValue={dadosEstb.email} type="text" style={{ width: "33vw" }} required />
+                  <input name="email" defaultValue={dadosEstb.email} type="text" required />
                 </div>
               </div>
 
               <div className={styles.divInput}>
-                <div>
+                <div className={styles.inputGroupFull}>
                   <label htmlFor="obs">Observações:</label>
-                  <textarea name="obs" defaultValue={dadosEstb.obs} style={{ width: "67vw", height: "40px" }}></textarea>
+                  <textarea
+                    name="obs"
+                    defaultValue={dadosEstb.obs}
+                    className={styles.textAreaField}
+                  ></textarea>
                 </div>
               </div>
 

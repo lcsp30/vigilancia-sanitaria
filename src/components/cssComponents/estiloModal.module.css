@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 .loadingOverlay {
   position: absolute;
   inset: 0;
@@ -29,90 +27,88 @@
 }
 
 .DialogOverlay {
-	background: rgba(15, 23, 42, 0.45);
-	position: fixed;
-	inset: 0;
-	animation: overlayShow 180ms cubic-bezier(0.16, 1, 0.3, 1);
-	backdrop-filter: blur(4px);
-	-webkit-backdrop-filter: blur(4px);
+  background: rgba(15, 23, 42, 0.45);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .btnNotificacao{
-padding: 14px 22px;
-border-radius: 10px;
-cursor: pointer;
-border: 1px solid #2f5d50;
-background: #006837;
-color: #ffffff;
-font-family: 'Inter', sans-serif;
-font-size: 0.95rem;
-font-weight: 600;
-letter-spacing: 0.01em;
-box-shadow: 0 8px 20px rgba(47, 93, 80, 0.18);
-transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: #003366;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .btnNotificacao:hover{
-opacity: 0.9;
-transform: translateY(-1px);
-box-shadow: 0 12px 24px rgba(47, 93, 80, 0.22);
-border-color: #006837;
-}
-
-.btnNotificacao:focus{
-outline: none;
-box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.14), 0 12px 24px rgba(47, 93, 80, 0.22);
-}
-
-.btnNotificacao:active{
-transform: translateY(0);
-box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
+  transform: translateY(-1px);
 }
 
 .DialogContent {
-	background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
-	border: 1px solid #d1d5db;
-	border-radius: 16px;
-	position: fixed;
-	top: 45%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 90vw;
-	max-width: 500px;
-	max-height: 85vh;
-	padding: 28px;
-	animation: contentShow 180ms cubic-bezier(0.16, 1, 0.3, 1);
-	box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
-	font-family: 'Inter', sans-serif;
-	color: #1f2937;
-	overflow-y: auto;
+  background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 400px;
+  max-height: 85vh;
+  padding: 20px 24px;
+  animation: contentShow 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.16);
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+  overflow-y: auto;
 }
+
 .DialogContent:focus {
-	outline: none;
+  outline: none;
+}
+
+/* Grid de 1 coluna — cada input em sua própria linha */
+.gridInput{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.gridInput + .divInput,
+.divInput + .gridInput {
+  margin-top: 6px;
 }
 
 .divInput{
-display: flex;
-flex-direction: column;
-margin-top: 16px;
-gap: 6px;
+  display: flex;
+  flex-direction: column;
 }
 
 .divInput input,
 .divInput select{
-width: 100%;
-  height: 46px;
-  padding: 10px 12px;
-  font-size: 0.97rem;
+  width: 100%;
+  height: 36px;
+  padding: 5px 8px;
+  font-size: 0.8rem;
   font-weight: 500;
   font-family: 'Inter', sans-serif;
   border: 1px solid #cbd5e1;
-  border-radius: 10px;
+  border-radius: 8px;
   outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   background: #ffffff;
   color: #1f2937;
   box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+  box-sizing: border-box;
 }
 
 .divInput input::placeholder{
@@ -122,162 +118,173 @@ width: 100%;
 
 .divInput input:hover,
 .divInput select:hover{
-  border-color: #006837;
-  background-color: #fcfdfc;
+  border-color: #003366;
+  background-color: #f0f5fa;
 }
 
 .divInput input:focus,
 .divInput select:focus{
-  border-color: #006837;
+  border-color: #003366;
   background-color: #ffffff;
-  transform: translateY(-1px);
+  box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.10), inset 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
 .divInput label{
- font-size: 0.95rem;
- font-weight: 600;
- margin-bottom: 3px;
- color: #374151;
- letter-spacing: 0.01em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: #374151;
+  letter-spacing: 0.01em;
 }
 
 .DialogTitle {
-	margin: 0;
-	font-weight: 700;
-	color: #1f2937;
-	font-size: 1.35rem;
-	line-height: 1.2;
-	letter-spacing: -0.02em;
-	padding-right: 36px;
+  margin: 0;
+  font-weight: 700;
+  color: #1f2937;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  padding-right: 32px;
 }
 
 .DialogDescription {
-	margin: 10px 0 20px;
-	color: #4b5563;
-	font-size: 0.95rem;
-	font-weight: 500;
-	line-height: 1.6;
+  margin: 8px 0 16px;
+  color: #4b5563;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .divBtnSalvar{
-display: flex;
-justify-content: end;
-margin-top: 32px;
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
 }
 
 .btnSalvar {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 10px;
-	padding: 14px 18px;
-	line-height: 1;
-	font-weight: 600;
-	font-size: 0.95rem;
-	font-family: 'Inter', sans-serif;
-	height: 44px;
-    width: 25%;
-    min-width: 120px;
-    cursor: pointer;
-	border: 1px solid #2f5d50;
-	background: #006837;
-	color: #ffffff;
-	box-shadow: 0 8px 20px rgba(47, 93, 80, 0.18);
-	transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 10px 18px;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  height: 38px;
+  min-width: 110px;
+  cursor: pointer;
+  border: 1px solid #003366;
+  background: #003366;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 51, 102, 0.16);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .btnSalvar:hover{
-	background: #006837;
-	transform: translateY(-1px);
-	border-color: #264b40;
+  background: linear-gradient(180deg, #002244 0%, #001a33 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 51, 102, 0.24);
+  border-color: #001a33;
 }
 
-.btnSalvar:focus{
-	outline: none;
-	box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.14), 0 12px 24px rgba(47, 93, 80, 0.22);
+.btnSalvar:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.14), 0 10px 20px rgba(0, 51, 102, 0.20);
+}
+
+.btnSalvar:focus:not(:focus-visible){
+  outline: none;
+  box-shadow: 0 6px 16px rgba(0, 51, 102, 0.16);
 }
 
 .btnSalvar:active{
-	transform: translateY(0);
-	box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.16);
 }
 
 /* Responsividade para telas pequenas */
 @media (max-width: 480px) {
-	.DialogContent {
-		padding: 20px;
-		width: 95vw;
-	}
-	.DialogTitle {
-		font-size: 1.15rem;
-	}
-	.btnSalvar {
-		width: 100%;
-		min-width: unset;
-	}
-	.divInput input,
-	.divInput select {
-		height: 42px;
-		font-size: 0.9rem;
-	}
+  .DialogContent {
+    padding: 16px;
+    width: 95vw;
+    max-width: 100%;
+  }
+  .DialogTitle {
+    font-size: 1.1rem;
+  }
+  .btnSalvar {
+    width: 100%;
+    min-width: unset;
+  }
+  .divInput input,
+  .divInput select {
+    height: 34px;
+    font-size: 0.78rem;
+  }
 }
 
 .IconButton {
-
-	all: unset;
-	font-family: 'Inter', sans-serif;
-	height: 32px;
-	width: 32px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	color: #4b5563;
-	position: absolute;
-	top: 14px;
-	right: 14px;
-    cursor: pointer;
-    border: 1px solid #d1d5db;
-	border-radius: 8px;
-	background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
-	box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
-	transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  all: unset;
+  font-family: 'Inter', sans-serif;
+  height: 28px;
+  width: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .IconButton:hover{
-	color: #1f2937;
-	border-color: #006837;
-	background: #f3f7f4;
-	transform: translateY(-1px);
-	box-shadow: 0 8px 16px rgba(15, 23, 42, 0.10);
+  color: #1f2937;
+  border-color: #003366;
+  background: #e8f0f7;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.10);
 }
 
-.IconButton:focus{
-	outline: none;
-	border-color: #006837;
-	box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12), 0 8px 16px rgba(15, 23, 42, 0.10);
+.IconButton:focus-visible{
+  outline: none;
+  border-color: #003366;
+  box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.12), 0 8px 16px rgba(15, 23, 42, 0.10);
+}
+
+.IconButton:focus:not(:focus-visible){
+  outline: none;
+  border-color: #d1d5db;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
 }
 
 .IconButton:active{
-	transform: translateY(0);
-	box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
 }
 
 @keyframes overlayShow {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes contentShow {
-	from {
-		opacity: 0;
-		transform: translate(-50%, -48%) scale(0.96);
-	}
-	to {
-		opacity: 1;
-		transform: translate(-50%, -50%) scale(1);
-	}
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }

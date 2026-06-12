@@ -1,17 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-.loadingOverlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.28);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
 .DialogOverlay {
 	background: rgba(15, 23, 42, 0.45);
 	position: fixed;
@@ -24,7 +12,7 @@
 .DialogContent {
 	background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
 	border: 1px solid #d1d5db;
-	border-radius: 16px;
+	border-radius: 5px;
 	position: fixed;
 	top: 45%;
 	left: 50%;
@@ -44,30 +32,52 @@
 	outline: none;
 }
 
+.btnMenu{
+width: 100%;
+cursor: pointer;
+text-align: center;
+margin: 7px 0;
+font-size: 0.8rem;
+}
+
+.btnMenu:hover{
+color: #003366;
+}
+
+.DialogTitle {
+	margin: 0;
+	font-weight: 700;
+	color: #1f2937;
+	font-size: 1.3rem;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+	padding-right: 36px;
+}
+
+.DialogDescription {
+	margin: 14px 0 20px;
+	color: #4b5563;
+	font-size: 0.96rem;
+	font-weight: 500;
+	line-height: 1.6;
+}
+
+.divBtn{
+display: flex;
+justify-content: end;
+margin-top: 20px;
+gap: 14px;
+}
+
+.divBtn button{
+cursor: pointer;
+}
+
 .divInput{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px 16px;
   margin-top: 18px;
-}
-
-/* Responsividade: 1 coluna em telas pequenas */
-@media (max-width: 600px) {
-  .divInput {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .DialogContent {
-    padding: 20px;
-    width: 95vw;
-  }
-  .DialogTitle {
-    font-size: 1.15rem;
-  }
-  .btnSalvar {
-    width: 100%;
-    min-width: unset;
-  }
 }
 
 .itensDoc{
@@ -76,27 +86,24 @@ align-items: center;
 gap: 10px;
 padding: 12px 14px;
 border: 1px solid #d1d5db;
-border-radius: 12px;
+border-radius: 5px;
 background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
 color: #374151;
 font-size: 0.95rem;
 font-weight: 500;
 line-height: 1.4;
-/* box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04); */
 transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .itensDoc:hover{
-border-color: #006837;
-background: linear-gradient(180deg, #ffffff 0%, #f4f8f5 100%);
+border-color: #003366;
 box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
-transform: translateY(-1px);
 }
 
 .itensDoc input{
 min-width: 20px;
 min-height: 20px;
-accent-color: #006837;
+accent-color: #003366;
 cursor: pointer;
 transition: transform 0.2s ease, filter 0.2s ease;
 }
@@ -106,116 +113,110 @@ transform: scale(1.05);
 filter: brightness(0.95);
 }
 
-
-.DialogTitle {
-	margin: 0;
-	font-weight: 700;
-	color: #1f2937;
-	font-size: 1.35rem;
-	line-height: 1.2;
-	letter-spacing: -0.02em;
-	padding-right: 36px;
+.divInput label{
+	font-size: 0.95rem;
+	font-weight: 600;
+	margin-bottom: 3px;
+	color: #374151;
+	letter-spacing: 0.01em;
 }
 
-.DialogDescription {
-	margin: 10px 0 20px;
-	color: #4b5563;
-	font-size: 0.95rem;
-	font-weight: 500;
-	line-height: 1.6;
+.divInput{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+  margin-top: 18px;
+}
+
+.divInput select:hover,
+.divInput input:hover{
+	border-color: #003366;
+	background-color: #f0f5fa;
+}
+
+.divInput select:focus,
+.divInput input:focus{
+	border-color: #003366;
+	background-color: #ffffff;
+	transform: translateY(-1px);
+	box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.10), inset 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.divInput input::placeholder{
+	color: #6b7280;
+	font-weight: 400;
 }
 
 .divBtnSalvar{
-display: flex;
-justify-content: end;
-margin-top: 30px;
+margin-top: 15px;
 }
 
 .btnSalvar {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 10px;
-	padding: 14px 18px;
+	border-radius: 5px;
+	padding: 10px 20px;
 	line-height: 1;
 	font-weight: 600;
-	font-size: 0.95rem;
+	font-size: 0.875rem;
 	font-family: 'Inter', sans-serif;
-	height: 44px;
-    width: 25%;
-    min-width: 130px;
-    cursor: pointer;
-	border: 1px solid #2f5d50;
-	/* background: linear-gradient(90deg, #2f5d50 0%, #3d6f61 100%); */
-	background-color: #006837;
+	cursor: pointer;
+	border: none;
+	background: #003366;
 	color: #ffffff;
-	box-shadow: 0 8px 20px rgba(47, 93, 80, 0.18);
 	transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .btnSalvar:hover{
-	background: linear-gradient(90deg, #264b40 0%, #355f54 100%);
-	transform: translateY(-2px);
-	box-shadow: 0 12px 24px rgba(47, 93, 80, 0.22);
-	border-color: #006837;
+	transform: translateY(-1px);
+	border-color: #001a33;
 }
 
-.btnSalvar:focus{
-	outline: none;
-	box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.14), 0 12px 24px rgba(47, 93, 80, 0.22);
-}
-
-.btnSalvar:active{
-	transform: translateY(0);
-	box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
-}
 
 .IconButton {
+	all: unset;
+	font-family: 'Inter', sans-serif;
+	height: 32px;
+	width: 32px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: #4b5563;
 	position: absolute;
 	top: 14px;
 	right: 14px;
     cursor: pointer;
-	width: 32px;
-	height: 32px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db;
 	border-radius: 8px;
 	background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
-	color: #4b5563;
 	box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
 	transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .IconButton:hover{
 	color: #1f2937;
-	border-color: #006837;
-	background: #f3f7f4;
+	border-color: #003366;
+	background: #e8f0f7;
 	transform: translateY(-1px);
 	box-shadow: 0 8px 16px rgba(15, 23, 42, 0.10);
 }
 
-.IconButton:focus{
+.IconButton:focus-visible{
 	outline: none;
-	border-color: #006837;
-	box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12), 0 8px 16px rgba(15, 23, 42, 0.10);
+	border-color: #003366;
+	box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.12), 0 8px 16px rgba(15, 23, 42, 0.10);
+}
+
+.IconButton:focus:not(:focus-visible){
+	outline: none;
+	border-color: #d1d5db;
+	box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
 }
 
 .IconButton:active{
 	transform: translateY(0);
 	box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
-}
-
-.btnMenu{
-width: 100%;
-border-bottom: 1px solid #4b5563;
-padding: 10px;
-cursor: pointer;
-}
-
-.btnMenu:hover{
-opacity: 0.8;
 }
 
 @keyframes overlayShow {

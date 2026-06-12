@@ -1,5 +1,69 @@
-# Logs
-logs
+# ============================================================
+#  SEGURANÇA — ARQUIVOS QUE NUNCA DEVEM SER VERSIONADOS
+# ============================================================
+
+# Variáveis de ambiente (contêm credenciais, tokens, chaves)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.staging
+
+# Chaves criptográficas e certificados digitais
+*.pem
+*.pfx
+*.p12
+*.key
+*.crt
+*.cer
+*.der
+*.csr
+
+# ============================================================
+#  DEPENDÊNCIAS
+# ============================================================
+
+node_modules/
+.pnp
+.pnp.js
+
+# ============================================================
+#  BUILD E OUTPUT
+# ============================================================
+
+dist/
+dist-ssr/
+build/
+out/
+.output/
+.next/
+nuxt/
+
+# ============================================================
+#  CACHE
+# ============================================================
+
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.vite/
+
+# ============================================================
+#  TESTES E COBERTURA
+# ============================================================
+
+coverage/
+.nyc_output/
+.vitest/
+
+# ============================================================
+#  LOGS E DEBUG
+# ============================================================
+
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,50 +71,108 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# ============================================================
+#  ARQUIVOS LOCAIS E TEMPORÁRIOS
+# ============================================================
+
 *.local
-
-# Variáveis de ambiente (segurança)
-.env
-.env.local
-.env.*.local
-
-# Cache de build/desenvolvimento
-.cache
-.parcel-cache
-.eslintcache
-.stylelintcache
-
-# Arquivos de teste
-coverage
-.nyc_output
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+*.bak
+*.tmp
+*.temp
 *.swp
 *.swo
 *~
+
+# ============================================================
+#  BACKUPS E DUMPS DE BANCO
+# ============================================================
+
+*.dump
+*.sql.gz
+*.tar.gz
+*.zip
+backup/
+
+# ============================================================
+#  EDITORES E IDES
+# ============================================================
+
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# IntelliJ / WebStorm
+.idea/
+*.iml
+
+# Eclipse / Spring Tool Suite
 .project
 .classpath
-.c9/
+.settings/
+.factorypath
 
-# Sistema operacional
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim / Neovim
+*.sw?
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Sessionx.vim
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================================
+#  SISTEMA OPERACIONAL
+# ============================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
 Thumbs.db
-*.pem
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
-# Misc
-.turbo
-.vercel
-.output
+# Linux
+.directory
 
-.cline
+# ============================================================
+#  MISCELÂNEA
+# ============================================================
+
+# Ferramenta Cline (configuração local de IA)
+.cline/
+
+# Deploy platforms
+.vercel/
+.netlify/
+.serverless/
+
+# Docker (se adicionado futuramente)
+.docker/
+docker-compose.override.yml
+
+# ============================================================
+#  NÃO IGNORAR — EXCEÇÕES IMPORTANTES
+# ============================================================
+
+!.env.example
+!.gitkeep

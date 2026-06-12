@@ -1,0 +1,90 @@
+.sidebar {
+  width: 185px;
+  /* min-width: 230px; */
+  background: #222d32;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.logoArea {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logoText {
+  font-family: 'Inter', 'Manrope', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px;
+  text-decoration: none;
+  color: #b8c7ce;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.link:hover {
+  background: #2c3b41;
+  color: #ffffff;
+}
+
+.linkActive {
+  background: #1e282c;
+  color: #ffffff;
+  border-left-color: #003366;
+}
+
+.linkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.linkLabel {
+  line-height: 1.3;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 50px;
+    min-width: 50px;
+  }
+
+  .logoArea {
+    padding: 16px 14px;
+  }
+
+  .logoText {
+    display: none;
+  }
+
+  .link {
+    padding: 14px;
+    justify-content: center;
+  }
+
+  .linkLabel {
+    display: none;
+  }
+}

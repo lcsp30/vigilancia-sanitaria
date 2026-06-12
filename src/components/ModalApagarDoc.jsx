@@ -1,29 +1,44 @@
+// Modal de confirmação: envia DELETE com url e tipo para remover documento do filesystem e banco.
 import * as Dialog from "@radix-ui/react-dialog";
 import { AiTwotoneDelete } from "react-icons/ai";
 import styles from "./cssComponents/estiloModalApagarDoc.module.css";
 import { useState } from "react";
 import api from "../services/api";
 
+/**
+ * @param {Object} props
+ * @param {number} props.id - ID do registro do documento no banco
+ * @param {Function} props.setExecultar - Callback para refresh da lista pai
+ * @param {string} props.url - Caminho do arquivo no filesystem para o backend localizar e remover
+ * @param {string} props.tipo - "cpf" ou "cnpj" para o backend identificar o contexto
+ */
 function ModalApagarDoc({id, setExecultar, url, tipo}){
     let [fechar, setFechar] = useState(false);
+    let [erroMsg, setErroMsg] = useState('');
+
+    // Fecha o modal e limpa mensagem de erro sem executar ação.
     function cancelar(){
         setFechar(false);
+        setErroMsg('');
     }
 
+    // Dispara DELETE para o backend com os dados do arquivo e atualiza a lista pai.
     function deletar(){
-        api.delete('doc/deletar', {
+        setErroMsg('');
+        api.delete(`doc/${id}`, {
             params:{
-                id: id,
                 url: url,
                 tipo: tipo
             }
         })
         .then(function(response){
-            console.log(response.data);
             setExecultar(prev => !prev);
+            setFechar(false);
         })
         .catch(function(error){
-            console.error(error);
+            // FIXME: Fallback encadeado porque o backend retorna chaves de erro inconsistentes ('Menssagem', 'Error', 'error'). Unificar no backend.
+            const msg = error.response?.data?.Menssagem || error.response?.data?.Error || error.response?.data?.error || 'Falha ao apagar documento.';
+            setErroMsg(msg);
         });
     }
 
@@ -36,10 +51,15 @@ function ModalApagarDoc({id, setExecultar, url, tipo}){
                 <Dialog.Portal>
                         <Dialog.Overlay className={styles.DialogOverlay} />
                         <Dialog.Content className={styles.DialogContent}  onPointerDownOutside={(event) => event.preventDefault()}>
-                            <Dialog.Title className={styles.DialogTitle}>Apagar Documento</Dialog.Title>
-                            <Dialog.Description className={styles.DialogDescription}>
-                            Tem certeza que deseja <b>Apagar</b> o documento ?
-                        </Dialog.Description>
+                             <Dialog.Title className={styles.DialogTitle}>Apagar Documento</Dialog.Title>
+                             <Dialog.Description className={styles.DialogDescription}>
+                             Tem certeza que deseja <b>Apagar</b> o documento ?
+                         </Dialog.Description>
+                                {erroMsg && (
+                                    <div style={{ color: '#d32f2f', background: '#ffebee', padding: '8px 12px', borderRadius: 6, marginBottom: 12, fontSize: 14 }}>
+                                        {erroMsg}
+                                    </div>
+                                )}
                                 <div className={styles.divBtn}>
                                     <button onClick={deletar}>Apagar</button>
                                     <button onClick={cancelar}>Cancelar</button>

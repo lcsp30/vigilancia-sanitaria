@@ -1,152 +1,241 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* ============================================
+   Tela de Login — Estilo Padrão do Sistema
+   ============================================ */
 
-.divPrincipal{
-min-height: 100vh;
-background: linear-gradient(180deg, #f4f7f5 0%, #eef2ef 100%);
-font-family: 'Inter', sans-serif;
-color: #1f2937;
+.divPrincipal {
+  min-height: 100vh;
+  background: #f4f4f4;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.caixaFormulario{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 70vh;
+/* ---- Card do Formulário ---- */
+
+.caixaFormulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.formLogin{
-border: 1px solid #d1d5db;
-padding: 50px;
-border-radius: 12px;
-background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
-box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
-width: 100%;
-max-width: 440px;
+/* Container da logo (dentro do form) */
+.caixaImg {
+  width: 125px;
+  height: 125px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.caixaInput{
-display:flex;
-flex-direction: column;
-margin-top: 30px;
+.caixaImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.divCadastro{
-margin-top: 40px;
-text-align: end;
+.formLogin {
+  border: 1px solid #d2d6de;
+  padding: 20px 32px;
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 420px;
 }
 
-.inputLogin{
-padding: 12px 14px;
-border-radius: 10px;
-width: 100%;
-border: 1px solid #cbd5e1;
-font-family: 'Inter', sans-serif;
-font-size: 0.97rem;
-font-weight: 500;
-color: #1f2937;
-background: #ffffff;
-outline: none;
-box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
-transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-box-sizing: border-box;
+/* ---- Título ---- */
+
+.formTitle {
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #003366;
+  margin: 0 0 24px 0;
 }
 
-.inputLogin::placeholder{
-color: #6b7280;
-font-weight: 400;
+/* ---- Inputs ---- */
+
+.caixaInput {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
-.inputLogin:hover{
-border-color: #006837;
-background-color: #fcfdfc;
+/* Wrapper para input de senha + botão toggle */
+.senhaWrapper {
+  position: relative;
+  width: 100%;
 }
 
-.inputLogin:focus{
-border-color: #006837;
-box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.12);
-background-color: #ffffff;
+.inputSenha {
+  height: 38px;
+  padding: 6px 36px 6px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  font-size: 0.87rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  line-height: normal;
+  outline: none;
+  background: #ffffff;
+  color: #1f2937;
+  box-sizing: border-box;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.labelLogin{
-font-size: 0.96rem;
-font-weight: 600;
-color: #374151;
-letter-spacing: 0.01em;
-margin-bottom: 6px;
+.inputSenha::placeholder {
+  color: #6b7280;
+  font-weight: 400;
 }
 
-.linkCadastrar{
-color: #006837;
-cursor: pointer;
-font-weight: 600;
-transition: opacity 0.3s ease;
+.inputSenha:hover {
+  border-color: #003366;
+  background-color: #fcfdfc;
 }
 
-.linkCadastrar:hover{
-opacity: 0.7;
-text-decoration: underline;
+.inputSenha:focus {
+  border-color: #003366;
+  box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.12);
+  background-color: #ffffff;
 }
 
-.caixaBtn{
-display: flex;
-justify-content: center;
-margin-top: 40px;
+.btnToggleSenha {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
 }
 
-.btnEntrar{
-padding: 16px 40px;
-border-radius: 10px;
-cursor: pointer;
-border: 1px solid #2f5d50;
-font-size: 0.96rem;
-font-weight: 600;
-font-family: 'Inter', sans-serif;
-letter-spacing: 0.01em;
-background: #006837;
-color: #ffffff;
-box-shadow: 0 8px 20px rgba(47, 93, 80, 0.18);
-transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-width: 100%;
+.btnToggleSenha:hover {
+  color: #003366;
 }
 
-.btnEntrar:hover{
-opacity: 0.9;
-transform: translateY(-1px);
-box-shadow: 0 12px 24px rgba(47, 93, 80, 0.22);
+.labelLogin {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
-.btnEntrar:focus{
-outline: none;
-box-shadow: 0 0 0 4px rgba(47, 93, 80, 0.14), 0 12px 24px rgba(47, 93, 80, 0.22);
+.inputLogin {
+  height: 38px;
+  padding: 6px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  font-size: 0.87rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  line-height: normal;
+  outline: none;
+  background: #ffffff;
+  color: #1f2937;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btnEntrar:active{
-transform: translateY(0);
-box-shadow: 0 6px 14px rgba(47, 93, 80, 0.18);
+.inputLogin::placeholder {
+  color: #6b7280;
+  font-weight: 400;
 }
 
-/* Responsividade */
+.inputLogin:hover {
+  border-color: #003366;
+  background-color: #fcfdfc;
+}
+
+.inputLogin:focus {
+  border-color: #003366;
+  box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.12);
+  background-color: #ffffff;
+}
+
+/* ---- Mensagem de Erro ---- */
+
+.errorText {
+  color: #c0392b;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* ---- Botão ---- */
+
+.caixaBtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.btnEntrar {
+  padding: 12px 28px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #003366;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.01em;
+  background: #003366;
+  color: #ffffff;
+  transition: background 0.2s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.btnEntrar:hover {
+  background: #002244;
+  transform: translateY(-1px);
+}
+
+.btnEntrar:disabled {
+  background: #999;
+  border-color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* ---- Responsividade ---- */
+
 @media (max-width: 600px) {
   .caixaFormulario {
-    height: auto;
     padding: 60px 16px;
+    align-items: flex-start;
   }
+
   .formLogin {
     padding: 30px 20px;
-    width: 100%;
     max-width: 400px;
   }
+
   .inputLogin {
     width: 100%;
   }
+
   .labelLogin {
-    font-size: 16px;
-  }
-  .divCadastro {
-    margin-top: 30px;
-    text-align: center;
-  }
-  .divCadastro p {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
   }
 }

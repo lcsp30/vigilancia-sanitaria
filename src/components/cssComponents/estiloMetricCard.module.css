@@ -1,0 +1,96 @@
+.card {
+  background: #ffffff;
+  border: 1px solid #d2d6de;
+  border-radius: 5px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Top border colors */
+.card--green {
+  border-top: 3px solid #003366;
+}
+
+.card--blue {
+  border-top: 3px solid #3b82f6;
+}
+
+.card--yellow {
+  border-top: 3px solid #f59e0b;
+}
+
+.card--red {
+  border-top: 3px solid #ef4444;
+}
+
+.card--purple {
+  border-top: 3px solid #8b5cf6;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: #5f6570;
+  text-transform: uppercase;
+}
+
+.iconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconWrap--green {
+  background: rgba(0, 51, 102, 0.1);
+  color: #003366;
+}
+
+.iconWrap--blue {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.iconWrap--yellow {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+.iconWrap--red {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.iconWrap--purple {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+}
+
+.value {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #1f2937;
+}

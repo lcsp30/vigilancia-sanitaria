@@ -1,16 +1,23 @@
+// Abre modal para gerar uma Intimação (tipo=1) vinculada ao estabelecimento.
 import * as Dialog from "@radix-ui/react-dialog";
 import styles from "./cssComponents/estiloModal.module.css";
 import api from "../services/api";
 import { useState } from "react";
 
-
+/**
+ * @param {Object} props
+ * @param {number} props.id - ID do estabelecimento
+ * @param {string} props.ano - Ano de referência
+ * @param {string} props.tipo - "cpf" ou "cnpj"
+ * @param {Function} props.setExecultar - Força refresh da lista pai
+ */
 function ModalIntimacao({id, ano, tipo, setExecultar}){
     const hoje = new Date().toISOString().split("T")[0];
     let [fechar, setFechar] = useState(false);
 
+    // Envia os dados da intimação (tipo=1) para o endpoint compartilhado intimacao_constatacao.
     function criarIntimacao(e){
         e.preventDefault();
-
         let dados = new FormData(e.target);
         let dadosObj = Object.fromEntries(dados);
         dadosObj.estabelecimento_id = id;
@@ -18,16 +25,13 @@ function ModalIntimacao({id, ano, tipo, setExecultar}){
         dadosObj.tipoEstabelecimento = tipo;
         dadosObj.finalizar = 0;
         dadosObj.tipo = 1;
-
-        console.log(dadosObj);
         api.post('intimacao_constatacao', dadosObj)
         .then(function(response){
-             console.log(response.data);
              setExecultar(prev => !prev);
              setFechar(false);
         })
         .catch(function(error){
-            console.error(error);
+            // erro silencioso — o backend não retorna mensagem amigável para este endpoint
         });
     }
 
@@ -45,7 +49,8 @@ function ModalIntimacao({id, ano, tipo, setExecultar}){
 					Adicione os dados para gerar uma Intimação.
 				</Dialog.Description>
 					<form className={styles.formModal} onSubmit={criarIntimacao}>
-                        <div className={styles.divInput}>
+                        <div className={styles.gridInput}>
+                              <div className={styles.divInput}>
                             <label htmlFor="descricao">Descrição</label>
                             <input name="descricao" type="text" required/>
                         </div>
@@ -53,7 +58,7 @@ function ModalIntimacao({id, ano, tipo, setExecultar}){
                             <label htmlFor="data_expiracao">Data Limite</label>
                             <input name="data_expiracao" type="date" min={hoje} required/>
                         </div>
-                        
+                        </div>
                         <div className={styles.divBtnSalvar}>
                             <button type="submit" className={styles.btnSalvar}>Salvar</button>
                         </div>
