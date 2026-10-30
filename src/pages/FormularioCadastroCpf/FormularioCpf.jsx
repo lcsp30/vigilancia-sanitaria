@@ -13,6 +13,7 @@ function FormularioCpf() {
   const [selecionado, setSelecionado] = useState("");
   const [dados, setDados] = useState({ cpf: "", cep: "", telefone: "" });
   const [erroCpf, setErroCpf] = useState("");
+  const [erroEnvio, setErroEnvio] = useState("");
   const hoje = new Date().toISOString().split("T")[0];
   const nav = useNavigate();
 
@@ -34,6 +35,7 @@ function FormularioCpf() {
 
   function enviarForm(event) {
     event.preventDefault();
+    setErroEnvio("");
     const dadosForm = new FormData(event.target);
     const dadosJson = Object.fromEntries(dadosForm);
 
@@ -51,7 +53,22 @@ function FormularioCpf() {
         nav("/estabelecimentos-cpf");
       })
       .catch(function (error) {
-        console.log("Dados do Erro:", error.response.data);
+        console.error("Dados do Erro:", error.response?.data || error);
+        const data = error.response?.data;
+
+        // Laravel 422: { message, errors: { campo: [msgs] } }
+        const validationErrors = data?.errors;
+        if (validationErrors) {
+          if (validationErrors.cpf) {
+            setErroCpf(validationErrors.cpf[0]);
+          }
+          const primeira = Object.values(validationErrors)[0]?.[0];
+          alert(primeira || 'Erro ao cadastrar estabelecimento.');
+          return;
+        }
+
+        const msg = data?.detail || data?.error || data?.Error || 'Erro ao cadastrar estabelecimento.';
+        alert(msg);
       });
   }
 
@@ -134,6 +151,12 @@ function FormularioCpf() {
                   </p>
                 </div>
               </div>
+
+              {erroEnvio && (
+                <div style={{ color: '#d32f2f', background: '#ffebee', padding: '10px 16px', borderRadius: 6, marginBottom: 16, fontSize: 14, maxWidth: 600 }}>
+                  {erroEnvio}
+                </div>
+              )}
 
               {/* Formulário */}
               <div className={estilo.formCpf}>

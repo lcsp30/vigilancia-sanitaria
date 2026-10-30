@@ -1,29 +1,41 @@
-// Lista estabelecimentos PF (CPF) com busca local e navegação para tela de detalhes via location.state.
+// Lista estabelecimentos PF (CPF) com busca no banco (LIKE), paginação (70/página)
+// e navegação para detalhes via location.state.
 import estilo from "./estiloTelaEstabelecimentosCpf.module.css";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router";
-import { AiOutlineExport } from "react-icons/ai";
+import { AiOutlineExport, AiOutlineSearch, AiOutlineSetting } from "react-icons/ai";
 import Sidebar from "../../components/Sidebar";
 import TopAppBar from "../../components/TopAppBar/TopAppBar";
+import { useAuth } from "../../contexts/AuthContext";
 
 function TelaEstabelecimentosCpf() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { user } = useAuth();
   let nav = useNavigate();
   const [executou, setExecutou] = useState(false);
   let [dados, setDados] = useState([]);
   let [gerando, setGerando] = useState(false);
-  let [dadosExibir, setDadosExibir] = useState([]);
+
+  // Busca: valor digitado vs. valor efetivado (enviado à API)
+  const [busca, setBusca] = useState("");
+  const [buscaAtiva, setBuscaAtiva] = useState("");
+
+  // Paginação
+  const [pagina, setPagina] = useState(1);
+  const [totalPaginas, setTotalPaginas] = useState(1);
+  const [totalRegistros, setTotalRegistros] = useState(0);
 
   useEffect(() => {
     setGerando(true);
     api
-      .get("estabelecimentos_cpf")
+      .get("estabelecimentos_cpf", {
+        params: { busca: buscaAtiva, page: pagina },
+      })
       .then(function (response) {
-        const dados = response.data;
-        setDados(dados.data);
-        setDadosExibir(dados.data);
-        console.log(dados.data);
+        setDados(response.data.data);
+        setTotalPaginas(response.data.meta?.last_page ?? 1);
+        setTotalRegistros(response.data.meta?.total ?? response.data.data.length);
       })
       .catch(function (error) {
         console.log(error);
@@ -31,7 +43,7 @@ function TelaEstabelecimentosCpf() {
       .finally(function () {
         setGerando(false);
       });
-  }, [executou]);
+  }, [executou, buscaAtiva, pagina]);
 
   function detalhes(dadoId, dadoNome, dadoCategoria, cpf, idcategoria) {
     let dados = {
@@ -45,13 +57,20 @@ function TelaEstabelecimentosCpf() {
     nav("/informacao-estabelecimento", { state: dados });
   }
 
+  function abrirDadosCadastrais(dd) {
+    nav("/dados-estabelecimento-cpf", {
+      state: {
+        id: dd.id,
+        categoria: dd.categoria,
+        categoria_id: dd.categoria_id,
+      },
+    });
+  }
+
   async function deletar(e) {
     let iid = e;
-    console.log(iid);
-
     try {
       let response = await api.delete(`estabelecimentos_cpf/${iid}`);
-
       console.log(response);
       setExecutou((prev) => !prev);
     } catch (error) {
@@ -63,18 +82,24 @@ function TelaEstabelecimentosCpf() {
     nav(-1);
   }
 
-  function buscar(e) {
-    let valor = e.target.value.toLowerCase();
-    console.log(valor);
-    if (valor != "") {
-      let buscados = dados.filter((dd) =>
-        dd.nome_fantasia.toLowerCase().includes(valor)
-      );
-      setDadosExibir(buscados);
-      console.log(buscados);
-    } else {
-      setDadosExibir(dados);
-    }
+  // Botão de busca: efetiva a busca no banco e volta para a página 1
+  function buscar() {
+    setBuscaAtiva(busca.trim());
+    setPagina(1);
+  }
+
+  function limparBusca() {
+    setBusca("");
+    setBuscaAtiva("");
+    setPagina(1);
+  }
+
+  function paginaAnterior() {
+    if (pagina > 1) setPagina(pagina - 1);
+  }
+
+  function proximaPagina() {
+    if (pagina < totalPaginas) setPagina(pagina + 1);
   }
 
   return (
@@ -106,6 +131,15 @@ function TelaEstabelecimentosCpf() {
                     Gerencie os estabelecimentos vinculados a CPF
                   </p>
                 </div>
+                {user?.nivel_acesso === 1 && (
+                  <button
+                    type="button"
+                    className={estilo.btnGerenciarCategorias}
+                    onClick={() => nav("/categorias-cpf")}
+                  >
+                    <AiOutlineSetting size={18} /> Gerenciar Categorias
+                  </button>
+                )}
               </div>
 
               {/* Loading */}
@@ -118,11 +152,32 @@ function TelaEstabelecimentosCpf() {
               {/* Tabela */}
               <div className={estilo.divTabela}>
                 <div className={estilo.divInput}>
-                  <input
-                    type="text"
-                    onChange={buscar}
-                    placeholder="🔍 Buscar Estabelecimento..."
-                  />
+                  <div className={estilo.divBusca}>
+                    <input
+                      type="text"
+                      value={busca}
+                      onChange={(e) => setBusca(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && buscar()}
+                      placeholder="🔍 Buscar por nome, CPF ou proprietário..."
+                    />
+                    <button
+                      type="button"
+                      className={estilo.btnBuscar}
+                      onClick={buscar}
+                      disabled={gerando}
+                    >
+                      <AiOutlineSearch size={16} /> Buscar
+                    </button>
+                    {buscaAtiva !== "" && (
+                      <button
+                        type="button"
+                        className={estilo.btnLimpar}
+                        onClick={limparBusca}
+                      >
+                        Limpar
+                      </button>
+                    )}
+                  </div>
                 </div>
                 <div className={estilo.divTabelaScroll}>
                   <table className={estilo.tabelaEstabelecimnetos}>
@@ -137,11 +192,16 @@ function TelaEstabelecimentosCpf() {
                       </tr>
                     </thead>
                     <tbody>
-                      {dadosExibir.length > 0 &&
-                        dadosExibir.map((dd) => (
+                      {dados.length > 0 &&
+                        dados.map((dd) => (
                           <tr key={dd.id}>
                             <td>{dd.cpf}</td>
-                            <td>{dd.nome_fantasia}</td>
+                            <td
+                              className={estilo.linkEstabelecimento}
+                              onClick={() => abrirDadosCadastrais(dd)}
+                            >
+                              {dd.nome_fantasia}
+                            </td>
                             <td>{dd.nome}</td>
                             <td>
                               {dd.categoria}/{dd.tipo_estb}
@@ -185,7 +245,7 @@ function TelaEstabelecimentosCpf() {
                             </td>
                           </tr>
                         ))}
-                      {dadosExibir.length == 0 && (
+                      {dados.length == 0 && (
                         <tr>
                           <td className={estilo.emptyState} colSpan={6}>
                             Nenhum estabelecimento encontrado.
@@ -194,6 +254,28 @@ function TelaEstabelecimentosCpf() {
                       )}
                     </tbody>
                   </table>
+                </div>
+
+                {/* Paginação */}
+                <div className={estilo.paginacao}>
+                  <button
+                    type="button"
+                    onClick={paginaAnterior}
+                    disabled={pagina <= 1 || gerando}
+                  >
+                    Anterior
+                  </button>
+                  <span>
+                    Página {pagina} de {totalPaginas} · {totalRegistros}{" "}
+                    registro(s)
+                  </span>
+                  <button
+                    type="button"
+                    onClick={proximaPagina}
+                    disabled={pagina >= totalPaginas || gerando}
+                  >
+                    Próxima
+                  </button>
                 </div>
               </div>
             </div>

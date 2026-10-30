@@ -6,11 +6,11 @@ import ModalConstatacaoAdvertencia from "../../components/ModalConstatacaoAdvert
 import ModalRequerimento from "../../components/ModalRequerimento";
 import ModalApagarDoc from "../../components/ModalApagarDoc";
 import ModalMenuDoc from "../../components/ModalMenuDoc";
+import ModalAdicionarDoc from "../../components/ModalAdicionarDoc";
 import ModalLicenca from "../../components/ModalLicenca";
 import { useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import ModalEditarEstb from "../../components/ModalEditarEstb";
 import ModalProtocolo from "../../components/ModalProtocolo";
 import TopAppBar from "../../components/TopAppBar/TopAppBar";
 import Sidebar from "../../components/Sidebar";
@@ -43,13 +43,21 @@ function TelaDocumentosEstabelecimento(){
         }
     })
     .then(function (response){
-        const dados = response.data.doc;
-        const docPendetes = response.data.docPendentes;
-        const docAnexados = response.data.docAnexados;
+        const dados = Array.isArray(response.data.doc)
+            ? response.data.doc
+            : Object.values(response.data.doc || {});
+        const docPendetes = Array.isArray(response.data.docPendentes)
+            ? response.data.docPendentes
+            : Object.values(response.data.docPendentes || []);
+        const docAnexados = Array.isArray(response.data.docAnexados)
+            ? response.data.docAnexados
+            : Object.values(response.data.docAnexados || []);
         const constatacaoDado = response.data.constatacao;
         const intimacaoDado = response.data.intimacao;
         const licenca = response.data.licenca;
-        const docAtivos = response.data.docAtivos;
+        const docAtivos = Array.isArray(response.data.docAtivos)
+            ? response.data.docAtivos
+            : Object.values(response.data.docAtivos || []);
         const anoAtual = response.data.anoAtual;
 
         console.log(response.data);
@@ -60,11 +68,13 @@ function TelaDocumentosEstabelecimento(){
         if(docAnexados.length >= docAtivos.length){
             setValorBtnLicenca(false);
 
-        if(licenca.doc_local == null){
-             docPendetes.push(licenca);
-            }else{
-            docAnexados.push(licenca);
-            }
+        if(licenca){
+            if(licenca.doc_local == null){
+                 docPendetes.push(licenca);
+                }else{
+                docAnexados.push(licenca);
+                }
+        }
 
             if(constatacaoDado.length != 0){
                 setValorBtnLicenca(true);
@@ -86,7 +96,8 @@ function TelaDocumentosEstabelecimento(){
         setConstatacao(constatacaoDado);
         setIntimacao(intimacaoDado);
     })
-    .catch(function (){
+    .catch(function (error){
+        console.error("Erro ao carregar documentos:", error);
         setErroApi(true);
     })
     .finally(function(){
@@ -186,9 +197,9 @@ function TelaDocumentosEstabelecimento(){
                                     <div className={estilo.tituloConteiner}><h3>Gerenciamento de Documentos</h3>
                                             <AiOutlineMenu size={20} style={{cursor: "pointer"}} onClick={menuDoc}/>
                                     <div className={estilo.menuDoc} style={{display: menu}}>
-                                        <ModalMenuDoc docs={docsMenu} menuDoc={menuDoc} tipoEstabelecimento={dd.tipo} setExecultar={setExecultar}/>
+                                        <ModalAdicionarDoc estabelecimentoId={dd.id} tipoEstabelecimento={dd.tipo} ano={dd.ano} menuDoc={menuDoc} setExecultar={setExecultar}/>
                                         <hr className={estilo.menuDivider} />
-                                        <ModalEditarEstb id={dd.id} tipoEstabelecimento={dd.tipo} menuDoc={menuDoc}/>
+                                        <ModalMenuDoc docs={docsMenu} menuDoc={menuDoc} tipoEstabelecimento={dd.tipo} setExecultar={setExecultar}/>
                                     </div></div>
                                 {documentosPendentes.length === 0 && documentosAnexados.length === 0 && (<div className={estilo.emptyState}><div className={estilo.emptyIcon}><AiFillFileText size={32} /></div><p className={estilo.emptyTitle}>Nenhum documento encontrado</p><p className={estilo.emptyHint}>Os documentos obrigatórios aparecerão aqui.</p></div>)}
                                 {documentosPendentes.length != 0 && <div className={estilo.divPendentes}><div className={estilo.divTituloPendentes}><div className={estilo.iconeAtencao}><AiFillWarning size={15}/></div><h4>Atenção: Documentos Pendentes</h4></div><div className={estilo.caixaPendenciasDivididas}>
@@ -198,7 +209,7 @@ function TelaDocumentosEstabelecimento(){
                                 </div>
                                 <div className={estilo.caixaGeralLicenca}>
                                     <div className={estilo.conteinerLicenca}><div className={estilo.tituloLicenca}><h3>Gerador de Licenciamento</h3></div><div className={estilo.caixaBtn}><ModalLicenca idDado={dd.id} ano={dd.ano} tipoEstabelecimento={dd.tipo} categoria={dd.categoria} nomeEstb={dd.nome} anoAtual={atualAno} valorBtnLicenca={valorBtnLicenca}/><div><p>Documentos Obrigatórios: <b>{documentosAnexados.length}/{docsAtivos.length}</b></p></div></div></div>
-                                    <div className={estilo.conteinerLicenca}><div className={estilo.tituloLicenca}><h3>Requerimento</h3></div><div className={estilo.caixaBtn}><ModalRequerimento idDado={dd.id} categoriaDado={dd.categoria} tipoEstabelecimento={dd.tipo}/></div></div>
+                                    <div className={estilo.conteinerLicenca}><div className={estilo.tituloLicenca}><h3>Requerimento</h3></div><div className={estilo.caixaBtn}><ModalRequerimento idDado={dd.id} categoriaDado={dd.categoria} tipoEstabelecimento={dd.tipo} nomeEstb={dd.nome}/></div></div>
                                     <div className={estilo.conteinerLicenca}><div className={estilo.tituloLicenca}><h3>Protocolo</h3></div><div className={estilo.caixaBtn}><ModalProtocolo idDado={dd.id} tipoEstabelecimento={dd.tipo} nomeEstb={dd.nome}/></div></div>
                                 </div>
                             </div>

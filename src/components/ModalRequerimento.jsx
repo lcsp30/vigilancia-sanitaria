@@ -10,7 +10,7 @@ import { useState } from "react";
  * @param {string} props.tipoEstabelecimento - "cpf" ou "cnpj"
  * @param {number} props.categoriaDado - ID da categoria (usado apenas no endpoint CPF)
  */
-function ModalRequerimento({categoriaDado, idDado, tipoEstabelecimento}){
+function ModalRequerimento({categoriaDado, idDado, tipoEstabelecimento, nomeEstb}){
     let [fechar, setFechar] = useState(false);
     let [gerando, setGerando] = useState(false);
     let [erroMsg, setErroMsg] = useState('');
@@ -35,7 +35,7 @@ function ModalRequerimento({categoriaDado, idDado, tipoEstabelecimento}){
                 const url = window.URL.createObjectURL(response.data);
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'Requerimento_' + idDado + '.docx');
+                link.setAttribute('download', 'Requerimento_' + nomeEstb + '.docx');
                 document.body.appendChild(link); link.click(); link.remove();
                 window.URL.revokeObjectURL(url);
                 setFechar(false);

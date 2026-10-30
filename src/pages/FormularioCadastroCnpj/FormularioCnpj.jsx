@@ -44,6 +44,7 @@ function FormularioCnpj() {
 
   function enviarForm(e) {
     e.preventDefault();
+    setErroEnvio("");
     let dados = new FormData(e.target);
     let dadosJson = Object.fromEntries(dados);
 
@@ -66,10 +67,21 @@ function FormularioCnpj() {
       })
       .catch(function (error) {
         console.error("Dados do Erro:", error.response?.data || error);
-        const msg = error.response?.data?.detail
-          || error.response?.data?.error
-          || 'Erro ao cadastrar estabelecimento.';
-        setErroEnvio(msg);
+        const data = error.response?.data;
+
+        // Laravel 422: { message, errors: { campo: [msgs] } }
+        const validationErrors = data?.errors;
+        if (validationErrors) {
+          if (validationErrors.cnpj) {
+            setErroCnpj(validationErrors.cnpj[0]);
+          }
+          const primeira = Object.values(validationErrors)[0]?.[0];
+          alert(primeira || 'Erro ao cadastrar estabelecimento.');
+          return;
+        }
+
+        const msg = data?.detail || data?.error || data?.Error || 'Erro ao cadastrar estabelecimento.';
+        alert(msg);
       });
   }
 

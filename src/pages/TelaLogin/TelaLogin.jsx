@@ -22,7 +22,11 @@ function TelaLogin(){
         try {
             await login(form.name, form.senha);
         } catch (err) {
-            setError(err.response?.data?.message || 'Erro ao fazer login.');
+            const data = err.response?.data;
+            const msg = (data?.errors && Object.values(data.errors)[0]?.[0])
+                || data?.message
+                || 'Erro ao fazer login.';
+            setError(msg);
         } finally {
             setLoading(false);
         }

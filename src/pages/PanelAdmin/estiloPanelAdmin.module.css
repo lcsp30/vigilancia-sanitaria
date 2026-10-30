@@ -178,6 +178,39 @@
   box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.12);
 }
 
+/* ---- Input de senha com toggle ---- */
+
+.senhaWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.senhaWrapper .input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.btnToggleSenha {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.btnToggleSenha:hover {
+  color: #003366;
+}
+
 /* ---- Botão Primário ---- */
 
 .btnPrimario {

@@ -27,10 +27,14 @@ import TelaLogin from './pages/TelaLogin/TelaLogin';
 import FormularioCpf from './pages/FormularioCadastroCpf/FormularioCpf';
 import FormularioCnpj from './pages/FormularioCadastroCnpj/FormularioCnpj';
 import TelaEstabelecimentosCpf from './pages/TelaEstabelecimentosCpf/TelaEstabelecimentosCpf';
+import TelaCategoriasCpf from './pages/TelaCategoriasCpf/TelaCategoriasCpf';
 import TelaInformacaoEstabelecimento from './pages/TelaInformacaoEstabelecimento/TelaInformacaoEstabelecimento';
 import TelaDocumentosEstabelecimento from './pages/TelaDocumentosEstabelecimento/TelaDocumentosEstabelecimento';
 import TelaEstabelecimentosNotificados from './pages/TelaEstabelecimentosNotificados/TelaEstabelecimentosNotificados';
 import TelaEstabelecimentosCnpj from './pages/TelaEstabelecimentosCnpj/TelaEstabelecimentosCnpj';
+import TelaCategoriasCnpj from './pages/TelaCategoriasCnpj/TelaCategoriasCnpj';
+import TelaDadosEstabelecimentoCpf from './pages/TelaDadosEstabelecimentoCpf/TelaDadosEstabelecimentoCpf';
+import TelaDadosEstabelecimentoCnpj from './pages/TelaDadosEstabelecimentoCnpj/TelaDadosEstabelecimentoCnpj';
 import TelaLicencas from './pages/TelaLicencas/TelaLicencas';
 import PanelAdmin from './pages/PanelAdmin/PanelAdmin';
 
@@ -100,6 +104,14 @@ let router = createBrowserRouter([
         ),
       },
       {
+        path: "/categorias-cpf",
+        Component: () => (
+          <RoleRoute allowedLevels={[1]}>
+            <TelaCategoriasCpf />
+          </RoleRoute>
+        ),
+      },
+      {
         path: "/informacao-estabelecimento",
         Component: () => (
           <ProtectedRoute>
@@ -128,6 +140,30 @@ let router = createBrowserRouter([
         Component: () => (
           <ProtectedRoute>
             <TelaEstabelecimentosCnpj />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/categorias-cnpj",
+        Component: () => (
+          <RoleRoute allowedLevels={[1]}>
+            <TelaCategoriasCnpj />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "/dados-estabelecimento-cpf",
+        Component: () => (
+          <ProtectedRoute>
+            <TelaDadosEstabelecimentoCpf />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/dados-estabelecimento-cnpj",
+        Component: () => (
+          <ProtectedRoute>
+            <TelaDadosEstabelecimentoCnpj />
           </ProtectedRoute>
         ),
       },

@@ -1,6 +1,7 @@
 // Gerencia usuários do sistema com duas abas (Cadastrar/Listar) — acesso restrito a admin (nível 1).
 import { useState, useEffect } from 'react';
 import { userService } from '../../services/userService';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import Sidebar from '../../components/Sidebar';
 import TopAppBar from '../../components/TopAppBar/TopAppBar';
 import estilo from './estiloPanelAdmin.module.css';
@@ -23,6 +24,7 @@ function PanelAdmin() {
 
   const [editandoId, setEditandoId] = useState(null);
   const [salvando, setSalvando] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   // Estado do modal de exclusão
   const [excluirId, setExcluirId] = useState(null);
@@ -220,15 +222,26 @@ function PanelAdmin() {
                         <label className={estilo.label} htmlFor="password">
                           {editandoId ? 'Nova Senha (deixe em branco para manter)' : 'Senha'}
                         </label>
-                        <input
-                          className={estilo.input}
-                          type="password"
-                          id="password"
-                          placeholder={editandoId ? 'Deixe em branco para manter' : 'Digite a senha'}
-                          value={form.password}
-                          onChange={(e) => setForm({ ...form, password: e.target.value })}
-                          required={!editandoId}
-                        />
+                        <div className={estilo.senhaWrapper}>
+                          <input
+                            className={estilo.input}
+                            type={mostrarSenha ? 'text' : 'password'}
+                            id="password"
+                            placeholder={editandoId ? 'Deixe em branco para manter' : 'Digite a senha'}
+                            value={form.password}
+                            onChange={(e) => setForm({ ...form, password: e.target.value })}
+                            required={!editandoId}
+                          />
+                          <button
+                            type="button"
+                            className={estilo.btnToggleSenha}
+                            onClick={() => setMostrarSenha(!mostrarSenha)}
+                            tabIndex={-1}
+                            title={mostrarSenha ? 'Esconder senha' : 'Mostrar senha'}
+                          >
+                            {mostrarSenha ? <AiOutlineEyeInvisible size={18} /> : <AiOutlineEye size={18} />}
+                          </button>
+                        </div>
                       </div>
 
                       <div className={estilo.campoGrupo}>

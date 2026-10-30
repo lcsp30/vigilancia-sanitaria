@@ -74,6 +74,31 @@
   margin: 4px 0 0 0;
 }
 
+.btnGerenciarCategorias {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid #003366;
+  border-radius: 5px;
+  background-color: #003366;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.btnGerenciarCategorias:hover {
+  background-color: #022448;
+}
+
+.btnGerenciarCategorias:active {
+  transform: scale(0.98);
+}
+
 /* ============================================
    Conteúdo Específico (Tabela)
    ============================================ */
@@ -300,6 +325,96 @@
   }
 }
 
+/* ---- Busca com botão ---- */
+
+.divBusca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.divBusca input {
+  width: 25vw;
+  min-width: 240px;
+}
+
+.btnBuscar,
+.btnLimpar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 18px;
+  border: 1px solid #003366;
+  border-radius: 5px;
+  background-color: #003366;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.btnBuscar:hover {
+  background-color: #022448;
+}
+
+.btnBuscar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnLimpar {
+  background-color: #ffffff;
+  color: #003366;
+}
+
+.btnLimpar:hover {
+  background-color: #f1f5f9;
+}
+
+/* ---- Paginação ---- */
+
+.paginacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.paginacao span {
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.paginacao button {
+  padding: 8px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #1f2937;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.paginacao button:hover:not(:disabled) {
+  border-color: #003366;
+  color: #003366;
+}
+
+.paginacao button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 /* ---- Responsivo ---- */
 
 @media (max-width: 1024px) {
@@ -360,4 +475,19 @@
     padding: 8px 4px;
     font-size: 0.72rem;
   }
+}
+
+
+/* ---- Link do Nome do Estabelecimento ---- */
+
+.linkEstabelecimento {
+  cursor: pointer;
+  color: #003366 !important;
+  font-weight: 600;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+.linkEstabelecimento:hover {
+  color: #022448 !important;
+  text-decoration: underline;
 }

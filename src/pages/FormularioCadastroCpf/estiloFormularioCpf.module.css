@@ -222,11 +222,13 @@
 
 /* ===== ERROR MESSAGE ===== */
 .errorMessage {
+  position: absolute;
+  top: 60px;
   color: #c0392b;
   font-size: 0.6875rem;
   font-weight: 500;
-  margin-top: 4px;
 }
+
 
 /* ===== WIDTH CLASSES ===== */
 .w60  { width: 80px; }
